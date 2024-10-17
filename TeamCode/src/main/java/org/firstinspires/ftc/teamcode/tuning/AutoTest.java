@@ -19,10 +19,10 @@ public final class AutoTest extends LinearOpMode {
 
         Actions.runBlocking(
             drive.actionBuilder(beginPose)
-                    .splineTo(new Vector2d(-10, 36), Math.toRadians(270))
+                    .splineTo(new Vector2d(-10, 39), Math.toRadians(270))
                     //Score on high chamber
                     .waitSeconds(1)
-                    .strafeTo(new Vector2d(-30, 36))
+                    .strafeTo(new Vector2d(-30, 39))
                     .splineTo(new Vector2d(-36, 18), Math.toRadians(270))
                     .strafeTo(new Vector2d(-45, 10))
                     .strafeTo(new Vector2d(-45, 52))
