@@ -13,6 +13,7 @@ public class HumanPlayerSide_1_0 {
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(60, 60, Math.toRadians(10*180), Math.toRadians(5*180), 12)
+                .setDimensions(2.0, 2.0) // This controls the size of the robot in the MeepMeep visulaizaiton \(^ヮ^)/
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-10, 61, Math.toRadians(270)))
