@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.CompoundActions;
 import org.firstinspires.ftc.teamcode.SparkFunOTOSDrive;
 
 @Autonomous(name = "KYS")
@@ -14,15 +15,17 @@ public final class AutoTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Pose2d beginPose = new Pose2d(-10, 61, Math.toRadians(270));
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, beginPose);
+        CompoundActions compoundActions = new CompoundActions(hardwareMap);
+
 
         waitForStart();
 
         Actions.runBlocking(
             drive.actionBuilder(beginPose)
-                    .splineTo(new Vector2d(-10, 39), Math.toRadians(270))
+                    .splineTo(new Vector2d(-10, 36), Math.toRadians(270))
                     //Score on high chamber
                     .waitSeconds(1)
-                    .strafeTo(new Vector2d(-30, 39))
+                    .strafeTo(new Vector2d(-30, 36))
                     .splineTo(new Vector2d(-36, 18), Math.toRadians(270))
                     .strafeTo(new Vector2d(-45, 10))
                     .strafeTo(new Vector2d(-45, 52))
