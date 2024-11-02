@@ -21,7 +21,7 @@ public class HumanPlayerSide_1_0 {
 //                .stopAndAdd(compoundActions.primitives.getScoreClawClose())
 //                .stopAndAdd(compoundActions.getScore())
                 .waitSeconds(2)
-                .strafeTo(new Vector2d(8, 38))
+                .strafeTo(new Vector2d(8, 39))
 //                .stopAndAdd(compoundActions.primitives.getScoreWristFlat())
 //                .stopAndAdd(compoundActions.primitives.getArmHitler())
                 .waitSeconds(0.5)
@@ -43,10 +43,10 @@ public class HumanPlayerSide_1_0 {
                 .strafeTo(new Vector2d(58, 50))
                 .strafeTo(new Vector2d(58, 10))
                 .strafeTo(new Vector2d(56, 10))
-//                .turn(Math.toRadians(90))
-                .splineToLinearHeading(new Pose2d(31, 10, Math.toRadians(180)), Math.toRadians(180))
+                .splineToLinearHeading(new Pose2d(31, 10, Math.toRadians(0)), Math.toRadians(0))
+//                    .turn(Math.toRadians(90))
 //                .stopAndAdd(compoundActions.primitives.getElevatorPark())
-//                .strafeTo(new Vector2d(31, 10))
+//                    .strafeTo(new Vector2d(31, 10))
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)

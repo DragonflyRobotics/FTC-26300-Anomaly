@@ -294,6 +294,26 @@ public class PrimitiveActions {
         return new ElevatorDown();
     }
 
+    private class ElevatorDownLittle implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(elevator1.getCurrentPosition() - (-1026)) > 20 || Math.abs(elevator2.getCurrentPosition() - (-753)) > 20) {
+                elevator1.setTargetPosition(-1026);
+                elevator2.setTargetPosition(-753);
+                elevator1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                elevator1.setPower(0.7);
+                elevator2.setPower(0.7);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getElevatorDownLittle() {
+        return new ElevatorDownLittle();
+    }
+
     private class ElevatorLowBasket implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
