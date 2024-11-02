@@ -19,26 +19,29 @@ public class BasketSide_1_3 {
                 .splineTo(new Vector2d(10, 36), Math.toRadians(270))
                                 .waitSeconds(.5)
                 //Score on High Chamber
-                .strafeTo(new Vector2d(24, 39))
-                .strafeToLinearHeading(new Vector2d(35, 26), Math.toRadians(180))
+                .splineTo(new Vector2d(10, 40), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(41, 45), Math.toRadians(110))
                 .waitSeconds(.5)
                 //Intake
-                .strafeTo(new Vector2d(37, 35))
                 .strafeToLinearHeading(new Vector2d(50, 50), Math.toRadians(45))
                 .waitSeconds(.5)
                 //Score
-                .strafeToLinearHeading(new Vector2d(58, 40), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(58, 48), Math.toRadians(90))
                 .waitSeconds(.5)
                 //Intake
-                .strafeToLinearHeading(new Vector2d(57, 50), Math.toRadians(55))
+                .turn(Math.toRadians(-15))
                 .waitSeconds(.5)
                 //Score
-                .strafeToLinearHeading(new Vector2d(58, 37), Math.toRadians(130))
+                .turn(Math.toRadians(45))
                 .waitSeconds(.5)
                 //Intake
-                .splineTo(new Vector2d(57, 50), Math.toRadians(55))
                 .waitSeconds(.5)
+                .turn(Math.toRadians(-45))
                 //Score
+                .strafeTo(new Vector2d(41, 35))
+                .strafeToLinearHeading(new Vector2d(41, 9), Math.toRadians(180))
+                //Lift arm
+                .strafeTo(new Vector2d(24, 9))
                 .build());
 
 

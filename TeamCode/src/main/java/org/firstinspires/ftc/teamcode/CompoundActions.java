@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompoundActions {
-    PrimitiveActions primitives;
+    public PrimitiveActions primitives;
     public CompoundActions(HardwareMap hardwareMap) {
         primitives = new PrimitiveActions(hardwareMap);
     }
@@ -35,18 +35,22 @@ public class CompoundActions {
 
     public Action getRetract() {
         return new SequentialAction(
+                primitives.getScoreClawOpen(),
                 new ParallelAction(
                     primitives.getRetractExtendo(),
-                    primitives.getSpinStop(),
+                    primitives.getSpinIn(),
                     primitives.getExtendoWristIn(),
                     primitives.getArmIn(),
                     primitives.getScoreWristPerp()
                 ),
-                new SleepAction(2),
-                primitives.getSpinOut(),
-                new SleepAction(0.25),
-                primitives.getScoreClawClose()
-//                primitives.getSpinStop()
+                new SleepAction(0.6),
+                new ParallelAction(
+                    primitives.getSpinOut(),
+                    new SleepAction(0.1),
+                    primitives.getScoreClawClose()
+                ),
+                primitives.getExtendoPartial(),
+                primitives.getSpinStop()
         );
     }
 

@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import androidx.core.math.MathUtils;
+
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
@@ -21,17 +23,25 @@ import java.util.List;
 
 @TeleOp(name = "Drive-fCD")
 public class Teleop extends LinearOpMode {
+    int elevator1(int percent) {
+        return (-3790/100) * percent;
+    }
+
+    int elevator2(int percent) {
+        return (-3380/100) * percent;
+    }
+
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        boolean clawIsOpen = true;
-
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, new Pose2d(0, 0, 0));
-        DcMotor elevator1 = hardwareMap.get(DcMotor.class, "elevator1");
-        DcMotor elevator2 = hardwareMap.get(DcMotor.class, "elevator2");
+
+        int elevatorHeight = 0;
+
         DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
-        elevator1.setDirection(DcMotorSimple.Direction.REVERSE);
 
         List<Action> runningActions = new ArrayList<>();
         CompoundActions compoundActions = new CompoundActions(hardwareMap);
@@ -46,46 +56,55 @@ public class Teleop extends LinearOpMode {
                 drive.otos.resetTracking();
             }
 
-            if(gamepad1.a) {
+            if(gamepad1.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getExtendIntake());
             }
-            if(gamepad1.b) {
+            if(gamepad1.b && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getRetract());
             }
-            if(gamepad1.y) {
+            if(gamepad1.y && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getScore());
             }
-            if(gamepad1.x) {
+            if(gamepad1.x && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getFold());
             }
 
-            if(gamepad1.right_bumper) {
-                if (clawIsOpen) {
-                    runningActions.add(
-                            new SequentialAction(
-                                compoundActions.primitives.getScoreClawClose(),
-                                new SleepAction(0.1)
-                            )
-                    );
-                    clawIsOpen = false;
-                } else {
-                    runningActions.add(
-                            new SequentialAction(
-                                    compoundActions.primitives.getScoreClawOpen(),
-                                    new SleepAction(0.1)
-                            )
-                    );
-                    clawIsOpen = true;
-                }
+            if((gamepad1.right_bumper || gamepad2.right_bumper) && runningActions.isEmpty()) {
+                    runningActions.add(compoundActions.primitives.getScoreClawClose());
+            }
+            if((gamepad1.left_bumper || gamepad2.left_bumper) && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getScoreClawOpen());
             }
 
-            if(gamepad2.left_trigger > 0.1 || gamepad2.right_trigger > 0.1) {
-                elevator1.setPower(gamepad2.left_trigger-gamepad2.right_trigger);
-                elevator2.setPower(gamepad2.left_trigger-gamepad2.right_trigger);
-            } else {
-                elevator1.setPower(0);
-                elevator2.setPower(0);
+
+            if(gamepad2.y && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getElevatorHighBasket());
             }
+
+            if(gamepad2.b && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getElevatorLowBasket());
+            }
+
+            if(gamepad2.a && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getElevatorDown());
+            }
+
+
+
+//            if (Math.abs(gamepad2.left_trigger) > 0.05) {
+//                elevatorHeight += 1;
+//                elevatorHeight = MathUtils.clamp(elevatorHeight, 0, 100);
+//                compoundActions.primitives.elevator1.setTargetPosition(elevator1(elevatorHeight));
+//                compoundActions.primitives.elevator2.setTargetPosition(elevator2(elevatorHeight));
+//            }
+//
+//            if (Math.abs(gamepad2.right_trigger) > 0.05) {
+//                elevatorHeight -= 1;
+//                elevatorHeight = MathUtils.clamp(elevatorHeight, 0, 100);
+//                compoundActions.primitives.elevator1.setTargetPosition(elevator1(elevatorHeight));
+//                compoundActions.primitives.elevator2.setTargetPosition(elevator2(elevatorHeight));
+//            }
+
 
             double botHeading = drive.pose.heading.toDouble();
             double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
@@ -108,14 +127,14 @@ public class Teleop extends LinearOpMode {
             if(dist.getDistance(DistanceUnit.MM) < 40) {
                 gamepad1.rumble(1);
                 gamepad1.setLedColor(0, 1, 0, 500);
-            } else {
-                gamepad1.setLedColor(1, 0, 0, 500);
             }
 
             telemetry.addData("x", drive.pose.position.x);
             telemetry.addData("y", drive.pose.position.y);
             telemetry.addData("heading (deg)", Math.toDegrees(drive.pose.heading.toDouble()));
             telemetry.addData("dist", dist.getDistance(DistanceUnit.MM));
+            telemetry.addData("elev1", compoundActions.primitives.elevator1.getCurrentPosition());
+            telemetry.addData("elev2", compoundActions.primitives.elevator2.getCurrentPosition());
             telemetry.update();
 
             TelemetryPacket packet = new TelemetryPacket();
