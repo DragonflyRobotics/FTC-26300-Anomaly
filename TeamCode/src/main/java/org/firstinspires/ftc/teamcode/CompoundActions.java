@@ -15,8 +15,8 @@ import java.util.List;
 
 public class CompoundActions {
     public PrimitiveActions primitives;
-    public CompoundActions(HardwareMap hardwareMap) {
-        primitives = new PrimitiveActions(hardwareMap);
+    public CompoundActions(HardwareMap hardwareMap, boolean isAuto) {
+        primitives = new PrimitiveActions(hardwareMap, isAuto);
     }
     public Action getExtendIntake() {
         return new SequentialAction(

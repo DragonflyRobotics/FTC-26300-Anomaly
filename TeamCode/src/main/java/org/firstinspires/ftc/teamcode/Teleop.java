@@ -40,11 +40,12 @@ public class Teleop extends LinearOpMode {
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, new Pose2d(0, 0, 0));
 
         int elevatorHeight = 0;
+        double drivePowerMult = 0.9;
 
         DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 
         List<Action> runningActions = new ArrayList<>();
-        CompoundActions compoundActions = new CompoundActions(hardwareMap);
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, false);
         waitForStart();
 
         while (opModeIsActive()) {
@@ -118,10 +119,10 @@ public class Teleop extends LinearOpMode {
             double frPower = (rotY - rotX - rx) / denominator;
             double brPower = (rotY + rotX - rx) / denominator;
 
-            drive.leftFront.setPower(flPower);
-            drive.leftBack.setPower(blPower);
-            drive.rightFront.setPower(frPower);
-            drive.rightBack.setPower(brPower);
+            drive.leftFront.setPower(flPower * drivePowerMult);
+            drive.leftBack.setPower(blPower * drivePowerMult);
+            drive.rightFront.setPower(frPower * drivePowerMult);
+            drive.rightBack.setPower(brPower * drivePowerMult);
 
             drive.updatePoseEstimate();
             if(dist.getDistance(DistanceUnit.MM) < 40) {

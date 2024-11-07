@@ -16,7 +16,7 @@ public final class AutoTest extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Pose2d beginPose = new Pose2d(-10, 61, Math.toRadians(90));
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, beginPose);
-        CompoundActions compoundActions = new CompoundActions(hardwareMap);
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, true);
 
 
         while (!isStopRequested() && !opModeIsActive()) {

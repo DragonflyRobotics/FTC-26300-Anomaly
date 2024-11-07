@@ -27,7 +27,7 @@ public class PrimitiveActions {
     double elevatorTolerance = 20;
     double servoTolerance = 0.05;
 
-    public PrimitiveActions(HardwareMap hardwareMap) {
+    public PrimitiveActions(HardwareMap hardwareMap, boolean isAuto) {
         scoreArm = hardwareMap.get(Servo.class, "scoreArm");
         scoreWrist = hardwareMap.get(Servo.class, "scoreWrist");
         scoreClaw = hardwareMap.get(Servo.class, "scoreClaw");
@@ -42,8 +42,10 @@ public class PrimitiveActions {
         elevator2 = hardwareMap.get(DcMotorEx.class, "elevator2");
         elevator1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         elevator2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        if(isAuto) {
+            elevator1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            elevator2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        }
         elevator1.setTargetPosition(0);
         elevator2.setTargetPosition(0);
         elevator1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -337,9 +339,9 @@ public class PrimitiveActions {
     private class ElevatorPark implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(elevator1.getCurrentPosition() - (-1426)) > 20 || Math.abs(elevator2.getCurrentPosition() - (-1153)) > 20) {
-                elevator1.setTargetPosition(-1426);
-                elevator2.setTargetPosition(-1153);
+            if (Math.abs(elevator1.getCurrentPosition() - (-1326)) > 20 || Math.abs(elevator2.getCurrentPosition() - (-1053)) > 20) {
+                elevator1.setTargetPosition(-1326);
+                elevator2.setTargetPosition(-1053);
                 elevator1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 elevator1.setPower(0.7);

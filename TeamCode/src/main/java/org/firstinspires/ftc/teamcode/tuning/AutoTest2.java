@@ -16,7 +16,7 @@ public final class AutoTest2 extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         Pose2d beginPose = new Pose2d(10, 61, Math.toRadians(90));
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, beginPose);
-        CompoundActions compoundActions = new CompoundActions(hardwareMap);
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, true);
 
 
         while (!isStopRequested() && !opModeIsActive()) {
@@ -30,15 +30,18 @@ public final class AutoTest2 extends LinearOpMode {
 
         Actions.runBlocking(
             drive.actionBuilder(beginPose)
-                    .stopAndAdd(compoundActions.primitives.getScoreClawClose())
-                    .stopAndAdd(compoundActions.primitives.getScoreWristPerp())
+                    .stopAndAdd(new ParallelAction(
+                            compoundActions.primitives.getScoreClawClose(),
+                            compoundActions.primitives.getScoreWristPerp(),
+                            compoundActions.primitives.getArmIn()
+                    ))
                     .stopAndAdd(new ParallelAction(
                                 compoundActions.getScore(),
                                 compoundActions.primitives.getElevatorPark(),
                                 compoundActions.primitives.getScoreWristFlat()
                             ))
                     .waitSeconds(.25)
-                    .strafeTo(new Vector2d(6.5, 36.5))
+                    .strafeTo(new Vector2d(6.5, 36.25))
                     .stopAndAdd(new ParallelAction(
                             compoundActions.primitives.getArmHitler(),
                             compoundActions.primitives.getElevatorDownLittle()
@@ -55,20 +58,21 @@ public final class AutoTest2 extends LinearOpMode {
                     .strafeTo(new Vector2d(47, 56.5))
                     .strafeTo(new Vector2d(45, 50))
                     .strafeTo(new Vector2d(40, 9))
-                    .strafeTo(new Vector2d(50, 9))
+                    .strafeTo(new Vector2d(51, 9))
                     .strafeTo(new Vector2d(50, 52))
                     .strafeTo(new Vector2d(50, 10))
                     .strafeTo(new Vector2d(59, 10))
                     .strafeTo(new Vector2d(59, 50))
                     .strafeTo(new Vector2d(59, 10))
                     .strafeTo(new Vector2d(56, 10))
-                    .stopAndAdd(compoundActions.primitives.getScoreClawClose())
-                    .stopAndAdd(compoundActions.primitives.getArmIn())
-                    .stopAndAdd(compoundActions.primitives.getElevatorPark())
-                    .strafeTo(new Vector2d(22, 10))
-//                    .turn(Math.toRadians(90))
+                    .afterTime(0, new ParallelAction(
+                            compoundActions.primitives.getScoreClawClose(),
+                            compoundActions.primitives.getArmHitler(),
+                            compoundActions.primitives.getElevatorPark()
+                    ))
+                    .strafeTo(new Vector2d(20.5, 10))
+                    .stopAndAdd(compoundActions.primitives.getArmHitler())
 
-//                    .strafeTo(new Vector2d(31, 10))
                     .build());
     }
 }

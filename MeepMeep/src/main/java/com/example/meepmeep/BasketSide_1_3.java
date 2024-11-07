@@ -1,5 +1,6 @@
 package com.example.meepmeep;
 
+import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
@@ -15,33 +16,51 @@ public class BasketSide_1_3 {
                 .setConstraints(60, 60, Math.toRadians(10*180), Math.toRadians(5*180), 18)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(10, 61, Math.toRadians(270)))
-                .splineTo(new Vector2d(10, 36), Math.toRadians(270))
-                                .waitSeconds(.5)
-                //Score on High Chamber
-                .splineTo(new Vector2d(10, 40), Math.toRadians(270))
-                .strafeToLinearHeading(new Vector2d(41, 45), Math.toRadians(110))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(10, 61, Math.toRadians(90)))
+                .strafeTo(new Vector2d(10, 36))
                 .waitSeconds(.5)
-                //Intake
-                .strafeToLinearHeading(new Vector2d(50, 50), Math.toRadians(45))
-                .waitSeconds(.5)
+//                .stopAndAdd(compoundActions.getScore())
+//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
+//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
                 //Score
-                .strafeToLinearHeading(new Vector2d(58, 48), Math.toRadians(90))
+                .splineTo(new Vector2d(10, 40), Math.toRadians(90))
+                .strafeToLinearHeading(new Vector2d(41, 45), Math.toRadians(290))
                 .waitSeconds(.5)
+//                .stopAndAdd(compoundActions.getExtendIntake())
+//                .stopAndAdd(compoundActions.getRetract())
+                //Intake
+                .strafeToLinearHeading(new Vector2d(50, 50), Math.toRadians(225))
+                .waitSeconds(.5)
+//                .stopAndAdd(compoundActions.getScore())
+//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
+//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
+                //Score
+                .strafeToLinearHeading(new Vector2d(58, 48), Math.toRadians(270))
+                .waitSeconds(.5)
+//                .stopAndAdd(compoundActions.getExtendIntake())
+//                .stopAndAdd(compoundActions.getRetract())
                 //Intake
                 .turn(Math.toRadians(-15))
                 .waitSeconds(.5)
+//                .stopAndAdd(compoundActions.getScore())
+//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
+//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
                 //Score
                 .turn(Math.toRadians(45))
                 .waitSeconds(.5)
+//                .stopAndAdd(compoundActions.getExtendIntake())
+//                .stopAndAdd(compoundActions.getRetract())
                 //Intake
                 .waitSeconds(.5)
                 .turn(Math.toRadians(-45))
+//                .stopAndAdd(compoundActions.getScore())
+//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
+//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
                 //Score
                 .strafeTo(new Vector2d(41, 35))
-                .strafeToLinearHeading(new Vector2d(41, 9), Math.toRadians(180))
+                .strafeToLinearHeading(new Vector2d(41, 9), Math.toRadians(0))
                 //Lift arm
-                .strafeTo(new Vector2d(24, 9))
+                .strafeTo(new Vector2d(22, 9))
                 .build());
 
 
