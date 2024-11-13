@@ -41,7 +41,9 @@ public class Teleop extends LinearOpMode {
 
         int elevatorHeight = 0;
         double drivePowerMult = 0.9;
-
+        double extendoMaxTheoPos = 30.0;
+        double extendoCurTheoPos = 0.0;
+        
         DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 
         List<Action> runningActions = new ArrayList<>();
@@ -106,7 +108,19 @@ public class Teleop extends LinearOpMode {
 //                compoundActions.primitives.elevator2.setTargetPosition(elevator2(elevatorHeight));
 //            }
 
+            extendoCurTheoPos += (double) gamepad2.right_stick_y;
+            extendoCurTheoPos = MathUtils.clamp(extendoCurTheoPos, 0.0, extendoMaxTheoPos);
+            double servoPer = extendoCurTheoPos/extendoMaxTheoPos; // finds the percent it needs to move to
+            double servoGoal = servoPer * 0.25;
+            servo1.setPosition(1-servoGoal); // I have no idea how to assing to this servo without redefining it
+            servo2.setPosition(servoGoal);
 
+            if(servoPer == 0){
+                scoreWrist.close() // lift wrist to bring claw back in when arm at min pos
+            }else{
+                scoreWist.open() // the extendo wrist should be ready to pick up samples when this is true
+            }
+            
             double botHeading = drive.pose.heading.toDouble();
             double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
             double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
