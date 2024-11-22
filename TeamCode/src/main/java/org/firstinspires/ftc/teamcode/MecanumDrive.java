@@ -474,7 +474,7 @@ public class MecanumDrive {
     }
 
     public TrajectoryActionBuilder actionBuilder(Pose2d beginPose) {
-        TrajectoryActionBuilder(beginPose, 0.0);
+        return actionBuilder(beginPose, 0.0);
     }
     public TrajectoryActionBuilder actionBuilder(Pose2d beginPose, double finalVel) {
         return new TrajectoryActionBuilder(
