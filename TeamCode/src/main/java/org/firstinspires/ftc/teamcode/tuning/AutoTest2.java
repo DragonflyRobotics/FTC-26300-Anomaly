@@ -30,26 +30,26 @@ public final class AutoTest2 extends LinearOpMode {
 
         Actions.runBlocking(
             drive.actionBuilder(beginPose)
-                    .stopAndAdd(new ParallelAction(
-                            compoundActions.primitives.getScoreClawClose(),
-                            compoundActions.primitives.getScoreWristPerp(),
-                            compoundActions.primitives.getArmIn()
-                    ))
-                    .stopAndAdd(new ParallelAction(
-                                compoundActions.getScore(),
-                                compoundActions.primitives.getElevatorPark(),
-                                compoundActions.primitives.getScoreWristFlat()
-                            ))
-                    .waitSeconds(.25)
+                    //.stopAndAdd(new ParallelAction(
+                            //compoundActions.primitives.getScoreClawClose(),
+                            //compoundActions.primitives.getScoreWristPerp(),
+                            //compoundActions.primitives.getArmIn()
+                    //))
+                    //.stopAndAdd(new ParallelAction(
+                                //compoundActions.getScore(),
+                                //compoundActions.primitives.getElevatorPark(),
+                                //compoundActions.primitives.getScoreWristFlat()
+                            //))
+                    //.waitSeconds(.25)
                     .strafeTo(new Vector2d(6.5, 36.25))
-                    .stopAndAdd(new ParallelAction(
-                            compoundActions.primitives.getArmHitler(),
-                            compoundActions.primitives.getElevatorDownLittle()
-                    ))
-                    .waitSeconds(0.25)
-                    .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
+                    //.stopAndAdd(new ParallelAction(
+                            //compoundActions.primitives.getArmHitler(),
+                            //compoundActions.primitives.getElevatorDownLittle()
+                    //))
+                    //.waitSeconds(0.25)
+                    //.stopAndAdd(compoundActions.primitives.getScoreClawOpen())
                     //Score on high chamber
-                    .waitSeconds(0.25)
+                    //.waitSeconds(0.25)
                     .strafeTo(new Vector2d(8, 48))
 //                    .turn(Math.toRadians(180))
                     .splineToLinearHeading(new Pose2d(34, 42, Math.toRadians(0)), Math.toRadians(0))
@@ -65,13 +65,13 @@ public final class AutoTest2 extends LinearOpMode {
                     .strafeTo(new Vector2d(59, 50))
                     .strafeTo(new Vector2d(59, 10))
                     .strafeTo(new Vector2d(56, 10))
-                    .afterTime(0, new ParallelAction(
-                            compoundActions.primitives.getScoreClawClose(),
-                            compoundActions.primitives.getArmHitler(),
-                            compoundActions.primitives.getElevatorPark()
-                    ))
+                    //.afterTime(0, new ParallelAction(
+                            //compoundActions.primitives.getScoreClawClose(),
+                            //compoundActions.primitives.getArmHitler(),
+                            //compoundActions.primitives.getElevatorPark()
+                    //))
                     .strafeTo(new Vector2d(20.5, 10))
-                    .stopAndAdd(compoundActions.primitives.getArmHitler())
+                    //.stopAndAdd(compoundActions.primitives.getArmHitler())
 
                     .build());
     }
