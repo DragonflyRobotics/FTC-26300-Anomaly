@@ -20,60 +20,65 @@ public class CompoundActions {
     }
     public Action getExtendIntake() {
         return new SequentialAction(
+                primitives.getExtendoOverFence(),
+                new SleepAction(0.25),
                 new ParallelAction(
-                    primitives.getScoreClawClose(),
-                    primitives.getExtendo(),
-                    primitives.getSpinIn(),
                     primitives.getExtendoWristOut(),
-                    primitives.getArmOut(),
-                    primitives.getScoreWristFlat()
+                    primitives.getSpinIn()
                 ),
                 new SleepAction(0.25),
-                primitives.getScoreClawOpen()
+                new ParallelAction(
+//                    primitives.getScoreClawClose(),
+                    primitives.getExtendo()
+//                    primitives.getArmOut(),
+//                    primitives.getScoreWristFlat()
+                ),
+                new SleepAction(0.25)
+//                primitives.getScoreClawOpen()
         );
     }
 
     public Action getRetract() {
         return new SequentialAction(
-                primitives.getScoreClawOpen(),
+//                primitives.getScoreClawOpen(),
                 new ParallelAction(
-                    primitives.getRetractExtendo(),
+                    primitives.getRetract(),
                     primitives.getSpinIn(),
-                    primitives.getExtendoWristIn(),
-                    primitives.getArmIn(),
-                    primitives.getScoreWristPerp()
+                    primitives.getExtendoWristIn()
+//                    primitives.getArmIn(),
+//                    primitives.getScoreWristPerp()
                 ),
                 new SleepAction(0.6),
-                new ParallelAction(
-                    primitives.getSpinOut(),
-                    new SleepAction(0.1),
-                    primitives.getScoreClawClose()
-                ),
-                primitives.getExtendoPartial(),
+//                new ParallelAction(
+//                    primitives.getSpinOut(),
+//                    new SleepAction(0.1)
+////                    primitives.getScoreClawClose()
+//                ),
+//                primitives.getExtendoPartial(),
                 primitives.getSpinStop()
         );
     }
-
-    public Action getScore() {
-        return new ParallelAction(
-                primitives.getSpinStop(),
-                primitives.getArmOut(),
-                primitives.getScoreClawClose(),
-                primitives.getExtendoPartial(),
-                primitives.getScoreWristFlat()
-        );
-    }
-
-    public Action getFold() {
-        return new SequentialAction(
-                new ParallelAction(
-                        primitives.getScoreClawOpen(),
-                        primitives.getRetractExtendo(),
-                        primitives.getSpinStop(),
-                        primitives.getExtendoWristIn(),
-                        primitives.getArmIn(),
-                        primitives.getScoreWristPerp()
-                )
-        );
-    }
+//
+//    public Action getScore() {
+//        return new ParallelAction(
+//                primitives.getSpinStop(),
+//                primitives.getArmOut(),
+//                primitives.getScoreClawClose(),
+//                primitives.getExtendoPartial(),
+//                primitives.getScoreWristFlat()
+//        );
+//    }
+//
+//    public Action getFold() {
+//        return new SequentialAction(
+//                new ParallelAction(
+//                        primitives.getScoreClawOpen(),
+//                        primitives.getRetractExtendo(),
+//                        primitives.getSpinStop(),
+//                        primitives.getExtendoWristIn(),
+//                        primitives.getArmIn(),
+//                        primitives.getScoreWristPerp()
+//                )
+//        );
+//    }
 }

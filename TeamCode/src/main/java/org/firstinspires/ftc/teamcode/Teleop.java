@@ -23,15 +23,15 @@ import java.util.List;
 
 @TeleOp(name = "Drive-fCD")
 public class Teleop extends LinearOpMode {
-    int elevator1(int percent) {
-        return (-3790/100) * percent;
-    }
-
-    int elevator2(int percent) {
-        return (-3380/100) * percent;
-    }
-
-
+//    int elevator1(int percent) {
+//        return (-3790/100) * percent;
+//    }
+//
+//    int elevator2(int percent) {
+//        return (-3380/100) * percent;
+//    }
+//
+//
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -45,13 +45,13 @@ public class Teleop extends LinearOpMode {
         DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 
         List<Action> runningActions = new ArrayList<>();
-        CompoundActions compoundActions = new CompoundActions(hardwareMap, false);
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, true);
         waitForStart();
 
         while (opModeIsActive()) {
-            double y = -gamepad1.left_stick_y;
-            double x = gamepad1.left_stick_x;
-            double rx = gamepad1.right_stick_x;
+            double y = -Math.pow(gamepad1.left_stick_y, 3);
+            double x = Math.pow(gamepad1.left_stick_x, 3);
+            double rx = Math.pow(gamepad1.right_stick_x, 3);
 
             if (gamepad1.options) {
                 drive.otos.resetTracking();
@@ -64,28 +64,37 @@ public class Teleop extends LinearOpMode {
                 runningActions.add(compoundActions.getRetract());
             }
             if(gamepad1.y && runningActions.isEmpty()) {
-                runningActions.add(compoundActions.getScore());
+                runningActions.add(
+                        new SequentialAction(
+                                compoundActions.getExtendIntake(),
+                                compoundActions.primitives.getSpinOut()));
             }
-            if(gamepad1.x && runningActions.isEmpty()) {
-                runningActions.add(compoundActions.getFold());
-            }
-
-            if((gamepad1.right_bumper || gamepad2.right_bumper) && runningActions.isEmpty()) {
-                    runningActions.add(compoundActions.primitives.getScoreClawClose());
-            }
-            if((gamepad1.left_bumper || gamepad2.left_bumper) && runningActions.isEmpty()) {
-                runningActions.add(compoundActions.primitives.getScoreClawOpen());
-            }
-
-
+//            if(gamepad1.b && runningActions.isEmpty()) {
+//                runningActions.add(compoundActions.getRetract());
+//            }
+//            if(gamepad1.y && runningActions.isEmpty()) {
+//                runningActions.add(compoundActions.getScore());
+//            }
+//            if(gamepad1.x && runningActions.isEmpty()) {
+//                runningActions.add(compoundActions.getFold());
+//            }
+//
+//            if((gamepad1.right_bumper || gamepad2.right_bumper) && runningActions.isEmpty()) {
+//                    runningActions.add(compoundActions.primitives.getScoreClawClose());
+//            }
+//            if((gamepad1.left_bumper || gamepad2.left_bumper) && runningActions.isEmpty()) {
+//                runningActions.add(compoundActions.primitives.getScoreClawOpen());
+//            }
+//
+//
             if(gamepad2.y && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorHighBasket());
             }
-
-            if(gamepad2.b && runningActions.isEmpty()) {
-                runningActions.add(compoundActions.primitives.getElevatorLowBasket());
-            }
-
+//
+//            if(gamepad2.b && runningActions.isEmpty()) {
+//                runningActions.add(compoundActions.primitives.getElevatorLowBasket());
+////            }
+//
             if(gamepad2.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorDown());
             }
@@ -130,12 +139,14 @@ public class Teleop extends LinearOpMode {
                 gamepad1.setLedColor(0, 1, 0, 500);
             }
 
-            telemetry.addData("x", drive.pose.position.x);
-            telemetry.addData("y", drive.pose.position.y);
-            telemetry.addData("heading (deg)", Math.toDegrees(drive.pose.heading.toDouble()));
-            telemetry.addData("dist", dist.getDistance(DistanceUnit.MM));
-            telemetry.addData("elev1", compoundActions.primitives.elevator1.getCurrentPosition());
-            telemetry.addData("elev2", compoundActions.primitives.elevator2.getCurrentPosition());
+//            telemetry.addData("x", drive.pose.position.x);
+//            telemetry.addData("y", drive.pose.position.y);
+//            telemetry.addData("heading (deg)", Math.toDegrees(drive.pose.heading.toDouble()));
+//            telemetry.addData("dist", dist.getDistance(DistanceUnit.MM));
+            telemetry.addData("elevr", compoundActions.primitives.elevatorr.getCurrentPosition());
+            telemetry.addData("elevl", compoundActions.primitives.elevatorl.getCurrentPosition());
+            telemetry.addData("elevl_speed", compoundActions.primitives.elevatorl.getVelocity());
+            telemetry.addData("elevr_speed", compoundActions.primitives.elevatorr.getVelocity());
             telemetry.update();
 
             TelemetryPacket packet = new TelemetryPacket();
