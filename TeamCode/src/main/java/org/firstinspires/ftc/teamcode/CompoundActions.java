@@ -20,6 +20,7 @@ public class CompoundActions {
     }
     public Action getExtendIntake() {
         return new SequentialAction(
+                primitives.getSpinIn(),
                 primitives.getExtendoOverFence(),
                 new SleepAction(0.25),
                 new ParallelAction(
@@ -28,57 +29,66 @@ public class CompoundActions {
                 ),
                 new SleepAction(0.25),
                 new ParallelAction(
-//                    primitives.getScoreClawClose(),
-                    primitives.getExtendo()
-//                    primitives.getArmOut(),
-//                    primitives.getScoreWristFlat()
+                    primitives.getClawClose(),
+                    primitives.getExtendo(),
+                    primitives.getArmHeilHitler(),
+                    primitives.getArmWristParallel()
                 ),
-                new SleepAction(0.25)
-//                primitives.getScoreClawOpen()
+                new SleepAction(0.25),
+                primitives.getClawOpen()
         );
     }
 
     public Action getRetract() {
         return new SequentialAction(
-//                primitives.getScoreClawOpen(),
                 new ParallelAction(
-                    primitives.getRetract(),
+                        primitives.getClawOpen(),
+                        primitives.getArmHandoff(),
+                        primitives.getArmWristPerpendicular()
+                ),
+                new SleepAction(0.2),
+                new ParallelAction(
+                    primitives.getExtendoOverFence(),
                     primitives.getSpinIn(),
                     primitives.getExtendoWristIn()
-//                    primitives.getArmIn(),
-//                    primitives.getScoreWristPerp()
                 ),
                 new SleepAction(0.6),
-//                new ParallelAction(
-//                    primitives.getSpinOut(),
-//                    new SleepAction(0.1)
-////                    primitives.getScoreClawClose()
-//                ),
-//                primitives.getExtendoPartial(),
-                primitives.getSpinStop()
+                new ParallelAction(
+                    primitives.getSpinOut(),
+                    new SleepAction(0.1)
+                ),
+                primitives.getExtendoOverFence(),
+                primitives.getSpinStop(),
+                primitives.getClawClose()
         );
     }
-//
-//    public Action getScore() {
-//        return new ParallelAction(
-//                primitives.getSpinStop(),
-//                primitives.getArmOut(),
-//                primitives.getScoreClawClose(),
-//                primitives.getExtendoPartial(),
-//                primitives.getScoreWristFlat()
-//        );
-//    }
-//
-//    public Action getFold() {
-//        return new SequentialAction(
-//                new ParallelAction(
-//                        primitives.getScoreClawOpen(),
-//                        primitives.getRetractExtendo(),
-//                        primitives.getSpinStop(),
-//                        primitives.getExtendoWristIn(),
-//                        primitives.getArmIn(),
-//                        primitives.getScoreWristPerp()
-//                )
-//        );
-//    }
+
+    public Action getScore() {
+        return new SequentialAction(
+                new ParallelAction(
+                    primitives.getSpinStop(),
+                    primitives.getArmHeilHitler(),
+                    primitives.getClawClose(),
+                    primitives.getExtendoOverFence(),
+                    primitives.getArmWristPerpendicular(),
+                    primitives.getSpinOut()
+                ),
+                new SleepAction(0.5),
+                primitives.getArmWristParallel(),
+                primitives.getSpinIn()
+        );
+    }
+
+    public Action getFold() {
+        return new SequentialAction(
+                new ParallelAction(
+                        primitives.getClawOpen(),
+                        primitives.getRetract(),
+                        primitives.getSpinStop(),
+                        primitives.getExtendoWristIn(),
+                        primitives.getArmHandoff(),
+                        primitives.getArmWristPerpendicular()
+                )
+        );
+    }
 }

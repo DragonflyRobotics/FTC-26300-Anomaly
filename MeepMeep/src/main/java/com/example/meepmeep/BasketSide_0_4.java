@@ -15,7 +15,7 @@ public class BasketSide_0_4 {
                 .setConstraints(60, 60, Math.toRadians(10*180), Math.toRadians(5*180), 18)
                 .build();
 
-        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(10, 61, Math.toRadians(0)))
+        myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(30, 61, Math.toRadians(0)))
                 .strafeToLinearHeading(new Vector2d(45, 61), Math.toRadians(0))
                                 .waitSeconds(.5)
                 //Score

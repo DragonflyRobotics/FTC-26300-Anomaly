@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.tuning;
 
-import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
@@ -10,8 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.CompoundActions;
 import org.firstinspires.ftc.teamcode.SparkFunOTOSDrive;
 
-@Autonomous(name = "KYS2")
-public final class AutoTest2 extends LinearOpMode {
+@Autonomous(name = "Auto_1_0_3")
+public final class Auto_1_0_3 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         Pose2d beginPose = new Pose2d(10, 61, Math.toRadians(90));
@@ -40,8 +39,8 @@ public final class AutoTest2 extends LinearOpMode {
                                 //compoundActions.primitives.getElevatorPark(),
                                 //compoundActions.primitives.getScoreWristFlat()
                             //))
-                    //.waitSeconds(.25)
-                    .strafeTo(new Vector2d(6.5, 36.25))
+//                    .waitSeconds(.25)
+                    .strafeTo(new Vector2d(6.5, 46.25))
                     //.stopAndAdd(new ParallelAction(
                             //compoundActions.primitives.getArmHitler(),
                             //compoundActions.primitives.getElevatorDownLittle()

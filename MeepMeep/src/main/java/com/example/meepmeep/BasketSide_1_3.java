@@ -17,50 +17,48 @@ public class BasketSide_1_3 {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(10, 61, Math.toRadians(90)))
-                .strafeTo(new Vector2d(10, 36))
-                .waitSeconds(.5)
-//                .stopAndAdd(compoundActions.getScore())
-//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
-//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
-                //Score
-                .splineTo(new Vector2d(10, 40), Math.toRadians(90))
-                .strafeToLinearHeading(new Vector2d(41, 45), Math.toRadians(290))
-                .waitSeconds(.5)
-//                .stopAndAdd(compoundActions.getExtendIntake())
-//                .stopAndAdd(compoundActions.getRetract())
-                //Intake
-                .strafeToLinearHeading(new Vector2d(50, 50), Math.toRadians(225))
-                .waitSeconds(.5)
-//                .stopAndAdd(compoundActions.getScore())
-//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
-//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
-                //Score
-                .strafeToLinearHeading(new Vector2d(58, 48), Math.toRadians(270))
-                .waitSeconds(.5)
-//                .stopAndAdd(compoundActions.getExtendIntake())
-//                .stopAndAdd(compoundActions.getRetract())
-                //Intake
-                .turn(Math.toRadians(-15))
-                .waitSeconds(.5)
-//                .stopAndAdd(compoundActions.getScore())
-//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
-//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
-                //Score
-                .turn(Math.toRadians(45))
-                .waitSeconds(.5)
-//                .stopAndAdd(compoundActions.getExtendIntake())
-//                .stopAndAdd(compoundActions.getRetract())
-                //Intake
-                .waitSeconds(.5)
-                .turn(Math.toRadians(-45))
-//                .stopAndAdd(compoundActions.getScore())
-//                .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
-//                .stopAndAdd(compoundActions.primitives.getScoreClawOpen())
-                //Score
-                .strafeTo(new Vector2d(41, 35))
-                .strafeToLinearHeading(new Vector2d(41, 9), Math.toRadians(0))
-                //Lift arm
-                .strafeTo(new Vector2d(22, 9))
+                //.stopAndAdd(new ParallelAction(
+                //compoundActions.primitives.getScoreClawClose(),
+                //compoundActions.primitives.getScoreWristPerp(),
+                //compoundActions.primitives.getArmIn()
+                //))
+                //.stopAndAdd(new ParallelAction(
+                //compoundActions.getScore(),
+                //compoundActions.primitives.getElevatorPark(),
+                //compoundActions.primitives.getScoreWristFlat()
+                //))
+                //.waitSeconds(.25)
+                .strafeTo(new Vector2d(6.5, 36.25))
+                //.stopAndAdd(new ParallelAction(
+                //compoundActions.primitives.getArmHitler(),
+                //compoundActions.primitives.getElevatorDownLittle()
+                //))
+                //.waitSeconds(0.25)
+                //.stopAndAdd(compoundActions.primitives.getScoreClawOpen())
+                //Score on high chamber
+                //.waitSeconds(0.25)
+                .strafeTo(new Vector2d(8, 48))
+//                    .turn(Math.toRadians(180))
+                .splineToLinearHeading(new Pose2d(34, 42, Math.toRadians(0)), Math.toRadians(0))
+                .strafeTo(new Vector2d(34, 16))
+                .strafeTo(new Vector2d(43, 6))
+                .strafeTo(new Vector2d(47, 56.5))
+                .strafeTo(new Vector2d(45, 50))
+                .strafeTo(new Vector2d(40, 9))
+                .strafeTo(new Vector2d(51, 9))
+                .strafeTo(new Vector2d(50, 52))
+                .strafeTo(new Vector2d(50, 10))
+                .strafeTo(new Vector2d(59, 10))
+                .strafeTo(new Vector2d(59, 50))
+                .strafeTo(new Vector2d(59, 10))
+                .strafeTo(new Vector2d(56, 10))
+                //.afterTime(0, new ParallelAction(
+                //compoundActions.primitives.getScoreClawClose(),
+                //compoundActions.primitives.getArmHitler(),
+                //compoundActions.primitives.getElevatorPark()
+                //))
+                .strafeTo(new Vector2d(20.5, 10))
+                //.stopAndAdd(compoundActions.primitives.getArmHitler())
                 .build());
 
 
