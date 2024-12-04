@@ -64,37 +64,32 @@ public class Teleop extends LinearOpMode {
                 runningActions.add(compoundActions.getRetract());
             }
             if(gamepad1.y && runningActions.isEmpty()) {
-                runningActions.add(
-                        new SequentialAction(
-                                compoundActions.getExtendIntake(),
-                                compoundActions.primitives.getSpinOut()));
+                runningActions.add(compoundActions.getScore());
             }
-//            if(gamepad1.b && runningActions.isEmpty()) {
-//                runningActions.add(compoundActions.getRetract());
-//            }
-//            if(gamepad1.y && runningActions.isEmpty()) {
-//                runningActions.add(compoundActions.getScore());
-//            }
-//            if(gamepad1.x && runningActions.isEmpty()) {
-//                runningActions.add(compoundActions.getFold());
-//            }
-//
-//            if((gamepad1.right_bumper || gamepad2.right_bumper) && runningActions.isEmpty()) {
-//                    runningActions.add(compoundActions.primitives.getScoreClawClose());
-//            }
-//            if((gamepad1.left_bumper || gamepad2.left_bumper) && runningActions.isEmpty()) {
-//                runningActions.add(compoundActions.primitives.getScoreClawOpen());
-//            }
-//
-//
+
+            if(gamepad1.x && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.getFold());
+            }
+
+            if((gamepad1.right_bumper || gamepad2.right_bumper) && runningActions.isEmpty()) {
+                    runningActions.add(compoundActions.primitives.getClawClose());
+            }
+            if((gamepad1.left_bumper || gamepad2.left_bumper) && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getClawOpen());
+            }
+
             if(gamepad2.y && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorHighBasket());
             }
-//
+
 //            if(gamepad2.b && runningActions.isEmpty()) {
-//                runningActions.add(compoundActions.primitives.getElevatorLowBasket());
-////            }
+//                runningActions.add(compoundActions.primitives.getArmHeilHitler());
+//            }
 //
+//            if(gamepad2.x && runningActions.isEmpty()) {
+//                runningActions.add(compoundActions.primitives.getArmHandoff());
+//            }
+
             if(gamepad2.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorDown());
             }
