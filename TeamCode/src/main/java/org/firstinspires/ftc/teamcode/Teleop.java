@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
@@ -23,15 +24,9 @@ import java.util.List;
 
 @TeleOp(name = "Drive-fCD")
 public class Teleop extends LinearOpMode {
-//    int elevator1(int percent) {
-//        return (-3790/100) * percent;
-//    }
-//
-//    int elevator2(int percent) {
-//        return (-3380/100) * percent;
-//    }
-//
-//
+    int ElevatorPosition(int percent) {
+        return (2750/100) * percent;
+    }
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -39,13 +34,13 @@ public class Teleop extends LinearOpMode {
 
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, new Pose2d(0, 0, 0));
 
-        int elevatorHeight = 0;
         double drivePowerMult = 0.9;
+        int elevatorPercent = 0;
 
         DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 
         List<Action> runningActions = new ArrayList<>();
-        CompoundActions compoundActions = new CompoundActions(hardwareMap, true);
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, true); //TODO: CHANGE BEFORE COMP
         waitForStart();
 
         while (opModeIsActive()) {
@@ -56,7 +51,6 @@ public class Teleop extends LinearOpMode {
             if (gamepad1.options) {
                 drive.otos.resetTracking();
             }
-
             if(gamepad1.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getExtendIntake());
             }
@@ -66,11 +60,9 @@ public class Teleop extends LinearOpMode {
             if(gamepad1.y && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getScore());
             }
-
             if(gamepad1.x && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getFold());
             }
-
             if((gamepad1.right_bumper || gamepad2.right_bumper) && runningActions.isEmpty()) {
                     runningActions.add(compoundActions.primitives.getClawClose());
             }
@@ -78,37 +70,34 @@ public class Teleop extends LinearOpMode {
                 runningActions.add(compoundActions.primitives.getClawOpen());
             }
 
+
             if(gamepad2.y && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorHighBasket());
             }
-
-//            if(gamepad2.b && runningActions.isEmpty()) {
-//                runningActions.add(compoundActions.primitives.getArmHeilHitler());
-//            }
-//
-//            if(gamepad2.x && runningActions.isEmpty()) {
-//                runningActions.add(compoundActions.primitives.getArmHandoff());
-//            }
-
+            if(gamepad2.x && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getElevatorChamber());
+            }
+            if(gamepad2.b && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getElevatorMidBasket());
+            }
             if(gamepad2.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorDown());
             }
-
-
-
-//            if (Math.abs(gamepad2.left_trigger) > 0.05) {
-//                elevatorHeight += 1;
-//                elevatorHeight = MathUtils.clamp(elevatorHeight, 0, 100);
-//                compoundActions.primitives.elevator1.setTargetPosition(elevator1(elevatorHeight));
-//                compoundActions.primitives.elevator2.setTargetPosition(elevator2(elevatorHeight));
-//            }
-//
-//            if (Math.abs(gamepad2.right_trigger) > 0.05) {
-//                elevatorHeight -= 1;
-//                elevatorHeight = MathUtils.clamp(elevatorHeight, 0, 100);
-//                compoundActions.primitives.elevator1.setTargetPosition(elevator1(elevatorHeight));
-//                compoundActions.primitives.elevator2.setTargetPosition(elevator2(elevatorHeight));
-//            }
+            if (gamepad2.dpad_up && runningActions.isEmpty()) {
+                compoundActions.primitives.extendol.setPosition(-gamepad2.right_stick_y);
+                compoundActions.primitives.extendor.setPosition(-gamepad2.right_stick_y);
+            }
+            if (Math.abs(gamepad2.left_stick_y) > 0.1 && gamepad2.dpad_down && runningActions.isEmpty()) {
+                int velocity = (int)(-gamepad2.left_stick_y * 10);
+                elevatorPercent += velocity;
+                elevatorPercent = MathUtils.clamp(elevatorPercent, 0, 100);
+                compoundActions.primitives.elevatorl.setTargetPosition(ElevatorPosition(elevatorPercent));
+                compoundActions.primitives.elevatorr.setTargetPosition(ElevatorPosition(elevatorPercent));
+                compoundActions.primitives.elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                compoundActions.primitives.elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                compoundActions.primitives.elevatorl.setPower(0.6);
+                compoundActions.primitives.elevatorr.setPower(0.6);
+            }
 
 
             double botHeading = drive.pose.heading.toDouble();

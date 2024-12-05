@@ -211,6 +211,44 @@ public class PrimitiveActions {
     //=======================================
 
     //=======================================
+    private class ElevatorMidBasket implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            elevatorl.setTargetPosition(1375);
+            elevatorr.setTargetPosition(1375);
+            elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevatorl.setPower(0.6);
+            elevatorr.setPower(0.6);
+            return false;
+        }
+    }
+
+    public Action getElevatorMidBasket() {
+        return new ElevatorMidBasket();
+    }
+    //=======================================
+
+    //=======================================
+    private class ElevatorChamber implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            elevatorl.setTargetPosition(1100);
+            elevatorr.setTargetPosition(1100);
+            elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            elevatorl.setPower(0.6);
+            elevatorr.setPower(0.6);
+            return false;
+        }
+    }
+
+    public Action getElevatorChamber() {
+        return new ElevatorChamber();
+    }
+    //=======================================
+
+    //=======================================
     private class ElevatorDown implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
