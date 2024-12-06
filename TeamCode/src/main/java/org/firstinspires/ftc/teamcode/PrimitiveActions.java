@@ -199,8 +199,8 @@ public class PrimitiveActions {
             elevatorr.setTargetPosition(2750);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            elevatorl.setPower(0.6);
-            elevatorr.setPower(0.6);
+            elevatorl.setPower(0.9);
+            elevatorr.setPower(0.9);
             return false;
         }
     }
@@ -218,8 +218,8 @@ public class PrimitiveActions {
             elevatorr.setTargetPosition(1375);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            elevatorl.setPower(0.6);
-            elevatorr.setPower(0.6);
+            elevatorl.setPower(0.9);
+            elevatorr.setPower(0.9);
             return false;
         }
     }
@@ -237,8 +237,8 @@ public class PrimitiveActions {
             elevatorr.setTargetPosition(1100);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            elevatorl.setPower(0.6);
-            elevatorr.setPower(0.6);
+            elevatorl.setPower(0.9);
+            elevatorr.setPower(0.9);
             return false;
         }
     }
@@ -256,8 +256,8 @@ public class PrimitiveActions {
             elevatorr.setTargetPosition(0);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            elevatorl.setPower(0.6);
-            elevatorr.setPower(0.6);
+            elevatorl.setPower(0.9);
+            elevatorr.setPower(0.9);
             return false;
         }
     }
