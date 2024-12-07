@@ -40,7 +40,7 @@ public class Teleop extends LinearOpMode {
         DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 
         List<Action> runningActions = new ArrayList<>();
-        CompoundActions compoundActions = new CompoundActions(hardwareMap, true); //TODO: CHANGE BEFORE COMP
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, false); //TODO: CHANGE BEFORE COMP
         waitForStart();
 
         while (opModeIsActive()) {
@@ -70,6 +70,15 @@ public class Teleop extends LinearOpMode {
                 runningActions.add(compoundActions.primitives.getClawOpen());
             }
 
+            if((gamepad1.right_trigger > 0.1) && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getSpinOut());
+            }
+            if((gamepad1.left_trigger > 0.1) && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getSpinIn());
+            }
+
+
+
 
             if(gamepad2.y && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorHighBasket());
@@ -83,9 +92,18 @@ public class Teleop extends LinearOpMode {
             if(gamepad2.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorDown());
             }
-            if (gamepad2.dpad_up && runningActions.isEmpty()) {
+            if (gamepad2.dpad_up) {
                 compoundActions.primitives.extendol.setPosition(-gamepad2.right_stick_y);
                 compoundActions.primitives.extendor.setPosition(-gamepad2.right_stick_y);
+
+//                if (-gamepad2.right_stick_y > 0.95) {
+//                    runningActions.add(compoundActions.primitives.getExtendoWristOut());
+//                    runningActions.add(compoundActions.primitives.getSpinIn());
+//                }
+//                if (-gamepad2.right_stick_y < 0.05) {
+//                    runningActions.add(compoundActions.primitives.getExtendoWristIn());
+//                    runningActions.add(compoundActions.primitives.getSpinStop());
+//                }
             }
             if (Math.abs(gamepad2.left_stick_y) > 0.1 && gamepad2.dpad_down && runningActions.isEmpty()) {
                 int velocity = (int)(-gamepad2.left_stick_y * 10);

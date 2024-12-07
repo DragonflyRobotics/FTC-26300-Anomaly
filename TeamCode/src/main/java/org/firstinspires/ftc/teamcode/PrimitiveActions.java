@@ -178,7 +178,7 @@ public class PrimitiveActions {
     private class ExtendoWristOut implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendoWrist.getPosition() - 0.78) > SERVO_TOLERANCE) {
+            if (Math.abs(extendoWrist.getPosition() - 0.78) > SERVO_TOLERANCE) { // 0.78
                 extendoWrist.setPosition(0.78);
                 return true;
             }
@@ -331,7 +331,9 @@ public class PrimitiveActions {
     public Action getArmWristPerpendicular() {
         return new ArmWristPerpendicular();
     }
+    //=======================================
 
+    //=======================================
     private class ArmHeilHitler implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
@@ -345,6 +347,23 @@ public class PrimitiveActions {
 
     public Action getArmHeilHitler() {
         return new ArmHeilHitler();
+    }
+    //=======================================
+
+    //=======================================
+    private class ArmVertical implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(scoreArm.getPosition() - 0.45) > SERVO_TOLERANCE) {
+                scoreArm.setPosition(0.45);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getArmVertical() {
+        return new ArmVertical();
     }
     //=======================================
 

@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.CompoundActions;
 import org.firstinspires.ftc.teamcode.SparkFunOTOSDrive;
 
-@Autonomous(name = "Auto_0_5")
-public final class Auto_0_5 extends LinearOpMode {
+@Autonomous(name = "Auto_0_5_Ex")
+public final class Auto_0_5_Ex extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         Pose2d beginPose = new Pose2d(36.5, 61, Math.toRadians(180));
@@ -28,7 +28,7 @@ public final class Auto_0_5 extends LinearOpMode {
         if (isStopRequested()) return;
 
         Actions.runBlocking(
-            drive.actionBuilder(beginPose, 13)
+            drive.actionBuilder(beginPose, 15)
                     .stopAndAdd(compoundActions.primitives.getElevatorHighBasket())
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
                     .stopAndAdd(compoundActions.primitives.getClawClose())
@@ -45,13 +45,13 @@ public final class Auto_0_5 extends LinearOpMode {
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     .waitSeconds(.25)
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
-                    .waitSeconds(.30)
-                    .stopAndAdd(compoundActions.primitives.getArmHandoff())
-                    .waitSeconds(.2)
+                    .waitSeconds(.15)
+                    .afterTime(0, compoundActions.primitives.getArmHandoff())
+                    .strafeToLinearHeading(new Vector2d(55, 45), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getArmWristParallel())
                     .stopAndAdd(compoundActions.primitives.getArmWristPerpendicular())
                     .stopAndAdd(compoundActions.primitives.getElevatorDown())
-                    .strafeToLinearHeading(new Vector2d(45.5, 44), Math.toRadians(270))
+                    .strafeToLinearHeading(new Vector2d(45.6, 44), Math.toRadians(270))
                     .stopAndAdd(compoundActions.getExtendIntake())
                     .waitSeconds(.1)
                     .waitSeconds(.2)
@@ -69,15 +69,15 @@ public final class Auto_0_5 extends LinearOpMode {
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     .waitSeconds(.25)
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
-                    .waitSeconds(.25)
-                    .stopAndAdd(compoundActions.primitives.getArmHandoff())
+                    .waitSeconds(.15)
+                    .afterTime(0, compoundActions.primitives.getArmHandoff())
+                    .strafeToLinearHeading(new Vector2d(51, 45), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getExtendoWristOut())
-                    .waitSeconds(.1)
                     .stopAndAdd(compoundActions.primitives.getElevatorDown())
                     .waitSeconds(.3)
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     //Score
-                    .strafeToLinearHeading(new Vector2d(55.3, 42), Math.toRadians(270))
+                    .strafeToLinearHeading(new Vector2d(56.2, 42), Math.toRadians(270))
                     .stopAndAdd(compoundActions.getExtendIntake())
                     .waitSeconds(.3)
                     .stopAndAdd(compoundActions.getRetract())
@@ -94,15 +94,15 @@ public final class Auto_0_5 extends LinearOpMode {
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     .waitSeconds(.5)
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
-                    .waitSeconds(.25)
-                    .stopAndAdd(compoundActions.primitives.getArmHandoff())
+                    .waitSeconds(.15)
+                    .afterTime(0, compoundActions.primitives.getArmHandoff())
+                    .strafeToLinearHeading(new Vector2d(53, 45), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getExtendoWristOut())
-                    .waitSeconds(.1)
                     .stopAndAdd(compoundActions.primitives.getElevatorDown())
                     .waitSeconds(.3)
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     //Score
-                    .strafeToLinearHeading(new Vector2d(56.7, 44), Math.toRadians(290))
+                    .strafeToLinearHeading(new Vector2d(56.5, 43), Math.toRadians(290))
                     .waitSeconds(.3)
                     .stopAndAdd(compoundActions.getExtendIntake())
                     .waitSeconds(.3)
@@ -115,22 +115,22 @@ public final class Auto_0_5 extends LinearOpMode {
                     .waitSeconds(.25)
                     .stopAndAdd(compoundActions.primitives.getArmVertical()) // changed
                     //Intake
-                    .strafeToLinearHeading(new Vector2d(56.5, 48.5), Math.toRadians(245))
+                    .strafeToLinearHeading(new Vector2d(56.1, 48.5), Math.toRadians(245))
                     .waitSeconds(.6)
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     .waitSeconds(.25)
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
-                    .waitSeconds(.25)
-                    .stopAndAdd(compoundActions.primitives.getArmHandoff())
-                    .waitSeconds(.1)
+                    .waitSeconds(.15)
+                    .afterTime(0, compoundActions.primitives.getArmHandoff())
+                    .strafeToLinearHeading(new Vector2d(53.5, 44.5), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getElevatorDown())
                     .strafeToLinearHeading(new Vector2d(30, 12), Math.toRadians(180))
                     .strafeToLinearHeading(new Vector2d(24, 12), Math.toRadians(180))
                     .stopAndAdd(compoundActions.primitives.getExtendoWristOut())
                     .stopAndAdd(compoundActions.getExtendIntake())
-                    .waitSeconds(.2)
+                    .waitSeconds(.05)
                     .stopAndAdd(compoundActions.getExtendIntake())
-                    .waitSeconds(.4)
+                    .waitSeconds(.3)
                     .stopAndAdd(compoundActions.getRetract())
                     .waitSeconds(.3)
                     .stopAndAdd(compoundActions.primitives.getClawClose())
@@ -141,13 +141,13 @@ public final class Auto_0_5 extends LinearOpMode {
                     .stopAndAdd(compoundActions.primitives.getArmVertical()) // changed
                     //Intake
                     .strafeToLinearHeading(new Vector2d(32, 12), Math.toRadians(180))
-                    .strafeToLinearHeading(new Vector2d(57, 49), Math.toRadians(235))
+                    .strafeToLinearHeading(new Vector2d(56.5, 49), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     .waitSeconds(.2)
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
-                    .waitSeconds(.1)
-                    .stopAndAdd(compoundActions.primitives.getArmHandoff())
-                    .waitSeconds(.25)
+                    .waitSeconds(.2)
+                    .afterTime(0, compoundActions.primitives.getArmHandoff())
+                    .strafeToLinearHeading(new Vector2d(53, 47), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getElevatorDown())
                     .build());
     }
