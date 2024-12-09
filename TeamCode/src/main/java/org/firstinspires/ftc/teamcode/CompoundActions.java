@@ -39,6 +39,27 @@ public class CompoundActions {
         );
     }
 
+    public Action getExtendIntakeTeleop() {
+        return new SequentialAction(
+                primitives.getSpinIn(),
+                primitives.getExtendoOverFence(),
+                new SleepAction(0.25),
+                new ParallelAction(
+                        primitives.getExtendoWristOutTeleop(),
+                        primitives.getSpinIn()
+                ),
+                new SleepAction(0.25),
+                new ParallelAction(
+                        primitives.getClawClose(),
+                        primitives.getExtendo(),
+                        primitives.getArmHeilHitler(),
+                        primitives.getArmWristParallel()
+                ),
+                new SleepAction(0.25),
+                primitives.getClawOpen()
+        );
+    }
+
     public Action getRetract() {
         return new SequentialAction(
                 new ParallelAction(

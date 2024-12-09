@@ -147,7 +147,7 @@ public final class Auto_0_5_Ex extends LinearOpMode {
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
                     .waitSeconds(.2)
                     .afterTime(0, compoundActions.primitives.getArmHandoff())
-                    .strafeToLinearHeading(new Vector2d(53, 47), Math.toRadians(235))
+                    .strafeToLinearHeading(new Vector2d(52, 47), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getElevatorDown())
                     .build());
     }

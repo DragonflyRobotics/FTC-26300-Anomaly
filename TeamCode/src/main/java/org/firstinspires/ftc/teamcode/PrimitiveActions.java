@@ -192,6 +192,23 @@ public class PrimitiveActions {
     //=======================================
 
     //=======================================
+    private class ExtendoWristOutTeleop implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(extendoWrist.getPosition() - 0.77) > SERVO_TOLERANCE) { // 0.78
+                extendoWrist.setPosition(0.77);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getExtendoWristOutTeleop() {
+        return new ExtendoWristOutTeleop();
+    }
+    //=======================================
+
+    //=======================================
     private class ElevatorHighBasket implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
@@ -214,8 +231,8 @@ public class PrimitiveActions {
     private class ElevatorMidBasket implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            elevatorl.setTargetPosition(1375);
-            elevatorr.setTargetPosition(1375);
+            elevatorl.setTargetPosition(1175);
+            elevatorr.setTargetPosition(1175);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorl.setPower(0.9);
@@ -347,6 +364,23 @@ public class PrimitiveActions {
 
     public Action getArmHeilHitler() {
         return new ArmHeilHitler();
+    }
+    //=======================================
+
+    //=======================================
+    private class ArmChamber implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(scoreArm.getPosition() - 0) > SERVO_TOLERANCE) {
+                scoreArm.setPosition(0);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getArmChamber() {
+        return new ArmChamber();
     }
     //=======================================
 
