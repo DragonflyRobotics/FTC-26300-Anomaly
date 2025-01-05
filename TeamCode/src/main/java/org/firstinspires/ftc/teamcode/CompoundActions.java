@@ -62,6 +62,8 @@ public class CompoundActions {
 
     public Action getRetract() {
         return new SequentialAction(
+                primitives.getExtendoOverFence(),
+                new SleepAction(0.2),
                 new ParallelAction(
                         primitives.getClawOpen(),
                         primitives.getArmHandoff(),
@@ -69,7 +71,6 @@ public class CompoundActions {
                 ),
                 new SleepAction(0.2),
                 new ParallelAction(
-                    primitives.getExtendoOverFence(),
                     primitives.getSpinIn(),
                     primitives.getExtendoWristIn()
                 ),

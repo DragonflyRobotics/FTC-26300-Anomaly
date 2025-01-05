@@ -40,7 +40,7 @@ public class Teleop extends LinearOpMode {
 //        DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 
         List<Action> runningActions = new ArrayList<>();
-        CompoundActions compoundActions = new CompoundActions(hardwareMap, false); //TODO: CHANGE BEFORE COMP
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, true); //TODO: CHANGE BEFORE COMP
         waitForStart();
 
         while (opModeIsActive()) {
@@ -98,8 +98,8 @@ public class Teleop extends LinearOpMode {
             }
 
             if (gamepad2.dpad_up) {
-                compoundActions.primitives.extendol.setPosition(-gamepad2.right_stick_y);
-                compoundActions.primitives.extendor.setPosition(-gamepad2.right_stick_y);
+                compoundActions.primitives.extendol.setPosition(-gamepad2.right_stick_y * 0.3);
+                compoundActions.primitives.extendor.setPosition(-gamepad2.right_stick_y * 0.3);
 
 //                if (-gamepad2.right_stick_y > 0.95) {
 //                    runningActions.add(compoundActions.primitives.getExtendoWristOut());
