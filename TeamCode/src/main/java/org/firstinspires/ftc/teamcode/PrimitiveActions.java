@@ -62,9 +62,9 @@ public class PrimitiveActions {
     private class Extendo implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendol.getPosition() - 1) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 1) > SERVO_TOLERANCE) {
-                extendol.setPosition(1);
-                extendor.setPosition(1);
+            if (Math.abs(extendol.getPosition() - 0.3) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 0.3) > SERVO_TOLERANCE) {
+                extendol.setPosition(0.3);
+                extendor.setPosition(0.3);
                 return true;
             }
             return false;
@@ -80,9 +80,9 @@ public class PrimitiveActions {
     private class ExtendoOverFence implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendol.getPosition() - 0.015) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 0.015) > SERVO_TOLERANCE) {
-                extendol.setPosition(0.015);
-                extendor.setPosition(0.015);
+            if (Math.abs(extendol.getPosition() - 0.02) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 0.02) > SERVO_TOLERANCE) {
+                extendol.setPosition(0.02);
+                extendor.setPosition(0.02);
                 return true;
             }
             return false;
@@ -178,8 +178,8 @@ public class PrimitiveActions {
     private class ExtendoWristOut implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendoWrist.getPosition() - 0.78) > SERVO_TOLERANCE) { // 0.78
-                extendoWrist.setPosition(0.78);
+            if (Math.abs(extendoWrist.getPosition() - 0.76) > SERVO_TOLERANCE) { // 0.78
+                extendoWrist.setPosition(0.76);
                 return true;
             }
             return false;
@@ -192,11 +192,28 @@ public class PrimitiveActions {
     //=======================================
 
     //=======================================
+    private class ExtendoWristOutTeleop implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(extendoWrist.getPosition() - 0.765) > SERVO_TOLERANCE) { // 0.78
+                extendoWrist.setPosition(0.765);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getExtendoWristOutTeleop() {
+        return new ExtendoWristOutTeleop();
+    }
+    //=======================================
+
+    //=======================================
     private class ElevatorHighBasket implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            elevatorl.setTargetPosition(2750);
-            elevatorr.setTargetPosition(2750);
+            elevatorl.setTargetPosition(825);
+            elevatorr.setTargetPosition(825);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorl.setPower(0.9);
@@ -214,8 +231,8 @@ public class PrimitiveActions {
     private class ElevatorMidBasket implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            elevatorl.setTargetPosition(1375);
-            elevatorr.setTargetPosition(1375);
+            elevatorl.setTargetPosition(400);
+            elevatorr.setTargetPosition(400);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorl.setPower(0.9);
@@ -233,8 +250,8 @@ public class PrimitiveActions {
     private class ElevatorChamber implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            elevatorl.setTargetPosition(1100);
-            elevatorr.setTargetPosition(1100);
+            elevatorl.setTargetPosition(400);
+            elevatorr.setTargetPosition(400);
             elevatorl.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorr.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             elevatorl.setPower(0.9);
@@ -269,8 +286,8 @@ public class PrimitiveActions {
     private class ClawClose implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreClaw.getPosition() - 0) > SERVO_TOLERANCE) {
-                scoreClaw.setPosition(0);
+            if (Math.abs(scoreClaw.getPosition() - 0.15) > SERVO_TOLERANCE) {
+                scoreClaw.setPosition(0.15);
                 return true;
             }
             return false;
@@ -303,8 +320,8 @@ public class PrimitiveActions {
     private class ArmWristParallel implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreWrist.getPosition() - 0) > SERVO_TOLERANCE) {
-                scoreWrist.setPosition(0);
+            if (Math.abs(scoreWrist.getPosition() - 0.65) > SERVO_TOLERANCE) {
+                scoreWrist.setPosition(0.65);
                 return true;
             }
             return false;
@@ -320,8 +337,8 @@ public class PrimitiveActions {
     private class ArmWristPerpendicular implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreWrist.getPosition() - 0.5) > SERVO_TOLERANCE) {
-                scoreWrist.setPosition(0.5);
+            if (Math.abs(scoreWrist.getPosition() - 0.1) > SERVO_TOLERANCE) {
+                scoreWrist.setPosition(0.1);
                 return true;
             }
             return false;
@@ -337,8 +354,8 @@ public class PrimitiveActions {
     private class ArmHeilHitler implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreArm.getPosition() - 0.15) > SERVO_TOLERANCE) {
-                scoreArm.setPosition(0.15);
+            if (Math.abs(scoreArm.getPosition() - 0.65) > SERVO_TOLERANCE) {
+                scoreArm.setPosition(0.65);
                 return true;
             }
             return false;
@@ -351,11 +368,28 @@ public class PrimitiveActions {
     //=======================================
 
     //=======================================
+    private class ArmChamber implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(scoreArm.getPosition() - 1) > SERVO_TOLERANCE) {
+                scoreArm.setPosition(1);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getArmChamber() {
+        return new ArmChamber();
+    }
+    //=======================================
+
+    //=======================================
     private class ArmVertical implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreArm.getPosition() - 0.45) > SERVO_TOLERANCE) {
-                scoreArm.setPosition(0.45);
+            if (Math.abs(scoreArm.getPosition() - 0.55) > SERVO_TOLERANCE) {
+                scoreArm.setPosition(0.55);
                 return true;
             }
             return false;
@@ -371,8 +405,8 @@ public class PrimitiveActions {
     private class ArmHandoff implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreArm.getPosition() - 1) > SERVO_TOLERANCE) {
-                scoreArm.setPosition(1);
+            if (Math.abs(scoreArm.getPosition() - 0.27) > SERVO_TOLERANCE) {
+                scoreArm.setPosition(0.27);
                 return true;
             }
             return false;

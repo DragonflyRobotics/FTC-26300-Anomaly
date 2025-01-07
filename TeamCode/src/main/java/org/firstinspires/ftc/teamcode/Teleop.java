@@ -37,10 +37,10 @@ public class Teleop extends LinearOpMode {
         double drivePowerMult = 0.9;
         int elevatorPercent = 0;
 
-        DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
+//        DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 
         List<Action> runningActions = new ArrayList<>();
-        CompoundActions compoundActions = new CompoundActions(hardwareMap, false); //TODO: CHANGE BEFORE COMP
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, true); //TODO: CHANGE BEFORE COMP
         waitForStart();
 
         while (opModeIsActive()) {
@@ -52,7 +52,7 @@ public class Teleop extends LinearOpMode {
                 drive.otos.resetTracking();
             }
             if(gamepad1.a && runningActions.isEmpty()) {
-                runningActions.add(compoundActions.getExtendIntake());
+                runningActions.add(compoundActions.getExtendIntakeTeleop());
             }
             if(gamepad1.b && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getRetract());
@@ -92,9 +92,14 @@ public class Teleop extends LinearOpMode {
             if(gamepad2.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.primitives.getElevatorDown());
             }
+
+            if(gamepad2.dpad_right && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getArmChamber());
+            }
+
             if (gamepad2.dpad_up) {
-                compoundActions.primitives.extendol.setPosition(-gamepad2.right_stick_y);
-                compoundActions.primitives.extendor.setPosition(-gamepad2.right_stick_y);
+                compoundActions.primitives.extendol.setPosition(-gamepad2.right_stick_y * 0.3);
+                compoundActions.primitives.extendor.setPosition(-gamepad2.right_stick_y * 0.3);
 
 //                if (-gamepad2.right_stick_y > 0.95) {
 //                    runningActions.add(compoundActions.primitives.getExtendoWristOut());
@@ -136,10 +141,10 @@ public class Teleop extends LinearOpMode {
             drive.rightBack.setPower(brPower * drivePowerMult);
 
             drive.updatePoseEstimate();
-            if(dist.getDistance(DistanceUnit.MM) < 40) {
-                gamepad1.rumble(1);
-                gamepad1.setLedColor(0, 1, 0, 500);
-            }
+//            if(dist.getDistance(DistanceUnit.MM) < 40) {
+//                gamepad1.rumble(1);
+//                gamepad1.setLedColor(0, 1, 0, 500);
+//            }
 
 //            telemetry.addData("x", drive.pose.position.x);
 //            telemetry.addData("y", drive.pose.position.y);

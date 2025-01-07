@@ -9,11 +9,11 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.CompoundActions;
 import org.firstinspires.ftc.teamcode.SparkFunOTOSDrive;
 
-@Autonomous(name = "Auto_0_5_Ex")
-public final class Auto_0_5_Ex extends LinearOpMode {
+@Autonomous(name = "Auto_0_6")
+public final class Auto_0_6 extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        Pose2d beginPose = new Pose2d(34.5, 62, Math.toRadians(180));
+        Pose2d beginPose = new Pose2d(36.5, 61, Math.toRadians(180));
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, beginPose);
         CompoundActions compoundActions = new CompoundActions(hardwareMap, true);
 
@@ -141,7 +141,7 @@ public final class Auto_0_5_Ex extends LinearOpMode {
                     .stopAndAdd(compoundActions.primitives.getArmVertical()) // changed
                     //Intake
                     .strafeToLinearHeading(new Vector2d(32, 12), Math.toRadians(180))
-                    .strafeToLinearHeading(new Vector2d(52.5, 49), Math.toRadians(235))
+                    .strafeToLinearHeading(new Vector2d(56.5, 49), Math.toRadians(235))
                     .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
                     .waitSeconds(.2)
                     .stopAndAdd(compoundActions.primitives.getClawOpen())
