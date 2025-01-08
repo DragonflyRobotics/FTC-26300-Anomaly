@@ -195,8 +195,8 @@ public class PrimitiveActions {
     private class ExtendoWristOutTeleop implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendoWrist.getPosition() - 0.765) > SERVO_TOLERANCE) { // 0.78
-                extendoWrist.setPosition(0.765);
+            if (Math.abs(extendoWrist.getPosition() - 0.76) > SERVO_TOLERANCE) { // 0.78
+                extendoWrist.setPosition(0.76);
                 return true;
             }
             return false;
@@ -320,8 +320,8 @@ public class PrimitiveActions {
     private class ArmWristParallel implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreWrist.getPosition() - 0.65) > SERVO_TOLERANCE) {
-                scoreWrist.setPosition(0.65);
+            if (Math.abs(scoreWrist.getPosition() - 0.4) > SERVO_TOLERANCE) {
+                scoreWrist.setPosition(0.4);
                 return true;
             }
             return false;

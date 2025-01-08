@@ -10,6 +10,7 @@ import com.acmerobotics.roadrunner.Actions;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.SleepAction;
+import com.qualcomm.hardware.rev.RevColorSensorV3;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -38,6 +39,9 @@ public class Teleop extends LinearOpMode {
         int elevatorPercent = 0;
 
 //        DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
+        RevColorSensorV3 colorSensor = hardwareMap.get(RevColorSensorV3.class, "dist");
+        colorSensor.initialize();
+        colorSensor.enableLed(true);
 
         List<Action> runningActions = new ArrayList<>();
         CompoundActions compoundActions = new CompoundActions(hardwareMap, true); //TODO: CHANGE BEFORE COMP
@@ -141,10 +145,10 @@ public class Teleop extends LinearOpMode {
             drive.rightBack.setPower(brPower * drivePowerMult);
 
             drive.updatePoseEstimate();
-//            if(dist.getDistance(DistanceUnit.MM) < 40) {
-//                gamepad1.rumble(1);
-//                gamepad1.setLedColor(0, 1, 0, 500);
-//            }
+            if(colorSensor.getDistance(DistanceUnit.MM) < 10) {
+                gamepad1.rumble(1);
+                gamepad1.setLedColor(0, 1, 0, 500);
+            }
 
 //            telemetry.addData("x", drive.pose.position.x);
 //            telemetry.addData("y", drive.pose.position.y);
