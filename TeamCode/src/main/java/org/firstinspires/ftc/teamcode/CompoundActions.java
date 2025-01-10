@@ -22,7 +22,7 @@ public class CompoundActions {
         return new SequentialAction(
                 primitives.getSpinIn(),
                 primitives.getExtendoOverFence(),
-                new SleepAction(0.25),
+//                new SleepAction(0.25),//cut
                 new ParallelAction(
                     primitives.getExtendoWristOut(),
                     primitives.getSpinIn()
@@ -74,7 +74,7 @@ public class CompoundActions {
                     primitives.getSpinIn(),
                     primitives.getExtendoWristIn()
                 ),
-                new SleepAction(0.6),
+                new SleepAction(0.2),//0.6
                 new ParallelAction(
                     primitives.getSpinOut(),
                     new SleepAction(0.1)
