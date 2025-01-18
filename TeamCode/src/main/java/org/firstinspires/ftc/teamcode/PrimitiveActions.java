@@ -19,6 +19,7 @@ public class PrimitiveActions {
     Servo extendol;
     Servo extendor;
     Servo extendoWrist;
+    Servo sweeper;
     CRServo wheell;
     CRServo wheelr;
     DcMotorEx elevatorl;
@@ -35,6 +36,7 @@ public class PrimitiveActions {
         extendol = hardwareMap.get(Servo.class, "extendo_left");
         extendor = hardwareMap.get(Servo.class, "extendo_right");
         extendoWrist = hardwareMap.get(Servo.class, "extendo_wrist");
+        sweeper = hardwareMap.get(Servo.class, "sweeper");
         wheell = hardwareMap.get(CRServo.class, "intake_wheel_l");
         wheelr = hardwareMap.get(CRServo.class, "intake_wheel_r");
 
@@ -320,8 +322,8 @@ public class PrimitiveActions {
     private class ArmWristParallel implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreWrist.getPosition() - 0.4) > SERVO_TOLERANCE) {
-                scoreWrist.setPosition(0.4);
+            if (Math.abs(scoreWrist.getPosition() - 0.0) > SERVO_TOLERANCE) {
+                scoreWrist.setPosition(0.0);
                 return true;
             }
             return false;
@@ -337,8 +339,8 @@ public class PrimitiveActions {
     private class ArmWristPerpendicular implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreWrist.getPosition() - 0.1) > SERVO_TOLERANCE) {
-                scoreWrist.setPosition(0.1);
+            if (Math.abs(scoreWrist.getPosition() - 0.335) > SERVO_TOLERANCE) {
+                scoreWrist.setPosition(0.355);
                 return true;
             }
             return false;
@@ -415,6 +417,40 @@ public class PrimitiveActions {
 
     public Action getArmHandoff() {
         return new ArmHandoff();
+    }
+    //=======================================
+
+    //=======================================
+    private class SweeperIn implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(sweeper.getPosition() - 0.3) > SERVO_TOLERANCE) {
+                sweeper.setPosition(0.3);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getSweeperIn() {
+        return new SweeperIn();
+    }
+    //=======================================
+
+    //=======================================
+    private class SweeperOut implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(sweeper.getPosition() - 1) > SERVO_TOLERANCE) {
+                sweeper.setPosition(1);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getSweeperOut() {
+        return new SweeperOut();
     }
     //=======================================
 }
