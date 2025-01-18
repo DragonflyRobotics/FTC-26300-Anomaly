@@ -340,7 +340,7 @@ public class PrimitiveActions {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
             if (Math.abs(scoreWrist.getPosition() - 0.335) > SERVO_TOLERANCE) {
-                scoreWrist.setPosition(0.355);
+                scoreWrist.setPosition(0.335);
                 return true;
             }
             return false;
