@@ -32,7 +32,6 @@ public class Teleop extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-
         SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, new Pose2d(0, 0, 0));
 
         double drivePowerMult = 0.9;
@@ -44,7 +43,7 @@ public class Teleop extends LinearOpMode {
         colorSensor.enableLed(true);
 
         List<Action> runningActions = new ArrayList<>();
-        CompoundActions compoundActions = new CompoundActions(hardwareMap, true); //TODO: CHANGE BEFORE COMP
+        CompoundActions compoundActions = new CompoundActions(hardwareMap, false); //TODO: CHANGE BEFORE COMP
         waitForStart();
 
         while (opModeIsActive()) {
@@ -98,7 +97,11 @@ public class Teleop extends LinearOpMode {
             }
 
             if(gamepad2.dpad_right && runningActions.isEmpty()) {
-                runningActions.add(compoundActions.primitives.getArmChamber());
+                runningActions.add(compoundActions.primitives.getSweeperOut());
+            }
+
+            if(gamepad2.dpad_left && runningActions.isEmpty()) {
+                runningActions.add(compoundActions.primitives.getSweeperIn());
             }
 
             if (gamepad2.dpad_up) {

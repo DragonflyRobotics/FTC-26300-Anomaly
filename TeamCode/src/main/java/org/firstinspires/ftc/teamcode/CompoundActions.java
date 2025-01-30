@@ -20,7 +20,7 @@ public class CompoundActions {
     }
     public Action getExtendIntake() {
         return new SequentialAction(
-                primitives.getSpinIn(),
+//                primitives.getSpinIn(),
                 primitives.getExtendoOverFence(),
 //                new SleepAction(0.25),//cut
                 new ParallelAction(
@@ -35,6 +35,28 @@ public class CompoundActions {
                     primitives.getArmWristParallel()
                 ),
                 new SleepAction(0.25),
+                primitives.getClawOpen()
+        );
+    }
+
+    public Action getExtendIntakeGinger() {
+        return new SequentialAction(
+//                primitives.getSpinIn(),
+                primitives.getExtendoOverFence(),
+//                new SleepAction(0.25),//cut
+                new ParallelAction(
+                        primitives.getExtendoWristOut(),
+                        primitives.getSpinIn()
+                ),
+                new SleepAction(0.25),
+                new ParallelAction(
+                        primitives.getClawClose(),
+                        primitives.getExtendoOverGinger(), //
+                        primitives.getArmHeilHitler(),
+                        primitives.getArmWristParallel()
+                ),
+                new SleepAction(0.25),
+                primitives.getExtendo(), // new
                 primitives.getClawOpen()
         );
     }

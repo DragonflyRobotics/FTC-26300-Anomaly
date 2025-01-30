@@ -76,7 +76,7 @@ public final class Auto_0_6 extends LinearOpMode {
 
                         .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
 
-                        .waitSeconds(.45)
+                        .waitSeconds(.55)
 
                         .stopAndAdd(compoundActions.primitives.getClawOpen())
 
@@ -84,7 +84,7 @@ public final class Auto_0_6 extends LinearOpMode {
 
                         .afterTime(0, compoundActions.primitives.getArmHandoff())
 
-                        .strafeToLinearHeading(new Vector2d(46, 45), Math.toRadians(235))
+                        .strafeToLinearHeading(new Vector2d(46.5, 45), Math.toRadians(235))
 
                         .stopAndAdd(compoundActions.primitives.getArmWristParallel())
 
@@ -94,8 +94,8 @@ public final class Auto_0_6 extends LinearOpMode {
 
 //                        .afterTime(.2, compoundActions.getExtendIntake())
 
-                        .strafeToLinearHeading(new Vector2d(42.3, 46.5), Math.toRadians(270))
-                        .stopAndAdd(compoundActions.getExtendIntake())
+                        .strafeToLinearHeading(new Vector2d(45, 47), Math.toRadians(270))
+                        .stopAndAdd(compoundActions.getExtendIntakeGinger())
                         .waitSeconds(.2)
 
                         .stopAndAdd(compoundActions.getRetract())
@@ -126,7 +126,7 @@ public final class Auto_0_6 extends LinearOpMode {
 
                         .afterTime(0, compoundActions.primitives.getArmHandoff())
 
-                        .strafeToLinearHeading(new Vector2d(45.4, 45), Math.toRadians(235))
+                        .strafeToLinearHeading(new Vector2d(46.5, 45), Math.toRadians(235))
 
                         .stopAndAdd(compoundActions.primitives.getExtendoWristOut())
 
@@ -138,8 +138,8 @@ public final class Auto_0_6 extends LinearOpMode {
 
 //                        .afterTime(.2, compoundActions.getExtendIntake())
 
-                        .strafeToLinearHeading(new Vector2d(52.8, 45), Math.toRadians(270))
-                        .stopAndAdd(compoundActions.getExtendIntake())
+                        .strafeToLinearHeading(new Vector2d(52.9, 45), Math.toRadians(270))
+                        .stopAndAdd(compoundActions.getExtendIntakeGinger())
                         .waitSeconds(.2)
 
                         .stopAndAdd(compoundActions.getRetract())
@@ -156,7 +156,7 @@ public final class Auto_0_6 extends LinearOpMode {
 
                         .stopAndAdd(compoundActions.primitives.getArmVertical())
 
-                        .strafeToLinearHeading(new Vector2d(51, 46.5), Math.toRadians(245))
+                        .strafeToLinearHeading(new Vector2d(53, 46.5), Math.toRadians(245))
 
                         .waitSeconds(.2)
 
@@ -180,9 +180,9 @@ public final class Auto_0_6 extends LinearOpMode {
 
                         .stopAndAdd(compoundActions.primitives.getArmHeilHitler())
 
-                        .strafeToLinearHeading(new Vector2d(50.7, 45), Math.toRadians(290))
+                        .strafeToLinearHeading(new Vector2d(51, 43.1), Math.toRadians(290))
 
-                        .stopAndAdd(compoundActions.getExtendIntake())
+                        .stopAndAdd(compoundActions.getExtendIntakeGinger())
 
                         .waitSeconds(.2)
 
@@ -202,7 +202,7 @@ public final class Auto_0_6 extends LinearOpMode {
 
                         .stopAndAdd(compoundActions.primitives.getArmVertical())
 
-                        .strafeToLinearHeading(new Vector2d(52.8, 45), Math.toRadians(245))
+                        .strafeToLinearHeading(new Vector2d(53.5, 48.5), Math.toRadians(235))
 
                         .waitSeconds(.2)
 
@@ -223,10 +223,10 @@ public final class Auto_0_6 extends LinearOpMode {
                         .strafeToLinearHeading(new Vector2d(30, 10), Math.toRadians(180))
 
                         .strafeToLinearHeading(new Vector2d(15, 10), Math.toRadians(180))
-
+                        .stopAndAdd(compoundActions.primitives.getSweeperOut())
+                        .waitSeconds(.2)
                         .stopAndAdd(compoundActions.primitives.getExtendoWristOut())
-
-                        .stopAndAdd(compoundActions.primitives.getSweeperOut()) // LUCAS CHECK THIS LINE
+                        // LUCAS CHECK THIS LINE
                         .stopAndAdd(compoundActions.getExtendIntake())
                         .stopAndAdd(compoundActions.primitives.getSweeperIn()) // LUCAS CHECK THIS LINE
 
@@ -271,10 +271,11 @@ public final class Auto_0_6 extends LinearOpMode {
                         .strafeToLinearHeading(new Vector2d(30, 10), Math.toRadians(180))
 
                         .strafeToLinearHeading(new Vector2d(14.3, 10), Math.toRadians(200))
-
+                        .stopAndAdd(compoundActions.primitives.getSweeperOut())
+                        .waitSeconds(.2)
                         .stopAndAdd(compoundActions.primitives.getExtendoWristOut())
 
-                        .stopAndAdd(compoundActions.primitives.getSweeperOut()) // LUCAS CHECK THIS LINE
+                         // LUCAS CHECK THIS LINE
                         .stopAndAdd(compoundActions.getExtendIntake())
                         .stopAndAdd(compoundActions.primitives.getSweeperIn()) // LUCAS CHECK THIS LINE
 
@@ -282,7 +283,7 @@ public final class Auto_0_6 extends LinearOpMode {
 
                         .stopAndAdd(compoundActions.getRetract())
 
-                        .waitSeconds(.2)
+                        .waitSeconds(.4)
 
                         .stopAndAdd(compoundActions.primitives.getClawClose())
 
