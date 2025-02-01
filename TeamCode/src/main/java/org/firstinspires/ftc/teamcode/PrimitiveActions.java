@@ -84,9 +84,9 @@ public class PrimitiveActions {
     private class ExtendoOverFence implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendol.getPosition() - 0.02) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 0.02) > SERVO_TOLERANCE) {
-                extendol.setPosition(0.02);
-                extendor.setPosition(0.02);
+            if (Math.abs(extendol.getPosition() - 0.06) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 0.06) > SERVO_TOLERANCE) {
+                extendol.setPosition(0.06);
+                extendor.setPosition(0.06);
                 return true;
             }
             return false;
@@ -102,9 +102,9 @@ public class PrimitiveActions {
     private class ExtendoOverGinger implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendol.getPosition() - 0.1) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 0.1) > SERVO_TOLERANCE) {
-                extendol.setPosition(0.1);
-                extendor.setPosition(0.1);
+            if (Math.abs(extendol.getPosition() - 0.15) > SERVO_TOLERANCE || Math.abs(extendor.getPosition() - 0.15) > SERVO_TOLERANCE) {
+                extendol.setPosition(0.15);
+                extendor.setPosition(0.15);
                 return true;
             }
             return false;
@@ -183,8 +183,8 @@ public class PrimitiveActions {
     private class ExtendoWristIn implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendoWrist.getPosition() - 0.15) > SERVO_TOLERANCE) {
-                extendoWrist.setPosition(0.15);
+            if (Math.abs(extendoWrist.getPosition() - 0.05) > SERVO_TOLERANCE) {
+                extendoWrist.setPosition(0.05);
                 return true;
             }
             return false;
@@ -200,8 +200,8 @@ public class PrimitiveActions {
     private class ExtendoWristOut implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendoWrist.getPosition() - 0.76) > SERVO_TOLERANCE) { // 0.78
-                extendoWrist.setPosition(0.76);
+            if (Math.abs(extendoWrist.getPosition() - 0.74) > SERVO_TOLERANCE) { // 0.78
+                extendoWrist.setPosition(0.74);
                 return true;
             }
             return false;
@@ -217,8 +217,8 @@ public class PrimitiveActions {
     private class ExtendoWristOutTeleop implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(extendoWrist.getPosition() - 0.76) > SERVO_TOLERANCE) { // 0.78
-                extendoWrist.setPosition(0.76);
+            if (Math.abs(extendoWrist.getPosition() - 0.74) > SERVO_TOLERANCE) { // 0.78
+                extendoWrist.setPosition(0.74);
                 return true;
             }
             return false;

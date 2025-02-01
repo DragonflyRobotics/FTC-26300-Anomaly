@@ -63,9 +63,9 @@ public class CompoundActions {
 
     public Action getExtendIntakeTeleop() {
         return new SequentialAction(
-                primitives.getSpinIn(),
+//                primitives.getSpinIn(),
                 primitives.getExtendoOverFence(),
-                new SleepAction(0.25),
+//                new SleepAction(0.25),
                 new ParallelAction(
                         primitives.getExtendoWristOutTeleop(),
                         primitives.getSpinIn()
@@ -109,17 +109,22 @@ public class CompoundActions {
 
     public Action getScore() {
         return new SequentialAction(
+                primitives.getClawClose(),
+                primitives.getSpinOut(),
+                primitives.getExtendoOverGinger(),
+                new SleepAction(0.15),
                 new ParallelAction(
-                    primitives.getSpinStop(),
+//                    primitives.getSpinStop(),
                     primitives.getArmHeilHitler(),
                     primitives.getClawClose(),
                     primitives.getExtendoOverFence(),
-                    primitives.getArmWristPerpendicular(),
+//                    primitives.getArmWristPerpendicular(),
                     primitives.getSpinOut()
                 ),
-                new SleepAction(0.5),
+                new SleepAction(0.2),
                 primitives.getArmWristParallel(),
-                primitives.getSpinIn()
+//                primitives.getSpinStop(),
+                primitives.getExtendoOverFence()
         );
     }
 

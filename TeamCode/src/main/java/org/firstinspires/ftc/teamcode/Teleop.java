@@ -38,12 +38,14 @@ public class Teleop extends LinearOpMode {
         int elevatorPercent = 0;
 
 //        DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
-        RevColorSensorV3 colorSensor = hardwareMap.get(RevColorSensorV3.class, "dist");
-        colorSensor.initialize();
-        colorSensor.enableLed(true);
+//        RevColorSensorV3 colorSensor = hardwareMap.get(RevColorSensorV3.class, "dist");
+//        colorSensor.initialize();
+//        colorSensor.enableLed(true);
 
         List<Action> runningActions = new ArrayList<>();
         CompoundActions compoundActions = new CompoundActions(hardwareMap, false); //TODO: CHANGE BEFORE COMP
+        compoundActions.primitives.scoreArm.setPosition(0.6);
+        compoundActions.primitives.scoreArm.setPosition(0.65);
         waitForStart();
 
         while (opModeIsActive()) {
@@ -148,10 +150,10 @@ public class Teleop extends LinearOpMode {
             drive.rightBack.setPower(brPower * drivePowerMult);
 
             drive.updatePoseEstimate();
-            if(colorSensor.getDistance(DistanceUnit.MM) < 10) {
-                gamepad1.rumble(1);
-                gamepad1.setLedColor(0, 1, 0, 500);
-            }
+//            if(colorSensor.getDistance(DistanceUnit.MM) < 10) {
+//                gamepad1.rumble(1);
+//                gamepad1.setLedColor(0, 1, 0, 500);
+//            }
 
 //            telemetry.addData("x", drive.pose.position.x);
 //            telemetry.addData("y", drive.pose.position.y);
