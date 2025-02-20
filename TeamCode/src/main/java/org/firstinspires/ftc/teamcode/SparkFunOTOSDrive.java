@@ -39,8 +39,8 @@ public class SparkFunOTOSDrive extends MecanumDrive {
         // tweaked slightly to compensate for imperfect mounting (eg. 1.3 degrees).
 
         // RR localizer note: These units are inches and radians.
-        public SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(-6.0735, -1.9104, -1.5826); //new SparkFunOTOS.Pose2D(6.0254, -0.5166, -1.582);
-//-6.3618, -3.3041, 1.5611
+        public SparkFunOTOS.Pose2D offset = new SparkFunOTOS.Pose2D(0, 0, Math.toRadians(0));
+
         // Here we can set the linear and angular scalars, which can compensate for
         // scaling issues with the sensor measurements. Note that as of firmware
         // version 1.0, these values will be lost after a power cycle, so you will
@@ -57,8 +57,8 @@ public class SparkFunOTOSDrive extends MecanumDrive {
         // multiple speeds to get an average, then set the linear scalar to the
         // inverse of the error. For example, if you move the robot 100 inches and
         // the sensor reports 103 inches, set the linear scalar to 100/103 = 0.971
-        public double linearScalar = 48/48.53976993110236;//-24/27.1534;
-        public double angularScalar = 0.9953;//0.9936;
+        public double linearScalar = 1.0;
+        public double angularScalar = 1.0;
     }
 
     public static SparkFunOTOSDrive.Params PARAMS = new SparkFunOTOSDrive.Params();

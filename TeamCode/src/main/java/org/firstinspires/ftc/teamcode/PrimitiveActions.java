@@ -24,6 +24,7 @@ public class PrimitiveActions {
     CRServo wheelr;
     DcMotorEx elevatorl;
     DcMotorEx elevatorr;
+    Servo hatcher;
 
     double SERVO_TOLERANCE = 0.05;
     double MOTOR_TOLERANCE = 20;
@@ -39,6 +40,7 @@ public class PrimitiveActions {
         sweeper = hardwareMap.get(Servo.class, "sweeper");
         wheell = hardwareMap.get(CRServo.class, "intake_wheel_l");
         wheelr = hardwareMap.get(CRServo.class, "intake_wheel_r");
+        hatcher = hardwareMap.get(Servo.class, "waytoomanydegreesoffreedomonthisthing");
 
         wheell.setDirection(CRServo.Direction.REVERSE);
         extendol.setDirection(Servo.Direction.REVERSE);
@@ -308,8 +310,8 @@ public class PrimitiveActions {
     private class ClawClose implements Action {
         @Override
         public boolean run(@NonNull TelemetryPacket packet) {
-            if (Math.abs(scoreClaw.getPosition() - 0.215) > SERVO_TOLERANCE) {
-                scoreClaw.setPosition(0.215);
+            if (Math.abs(scoreClaw.getPosition() - 0.205) > SERVO_TOLERANCE) {
+                scoreClaw.setPosition(0.205);
                 return true;
             }
             return false;
@@ -473,6 +475,45 @@ public class PrimitiveActions {
         return new SweeperOut();
     }
     //=======================================
+
+
+    //=======================================
+    private class HatcherOpen implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(hatcher.getPosition() - 0.33) > SERVO_TOLERANCE) {
+                hatcher.setPosition(0.33);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getHatcherOpen() {
+        return new HatcherOpen();
+    }
+    //=======================================
+
+
+    //=======================================
+    private class HatcherClose implements Action {
+        @Override
+        public boolean run(@NonNull TelemetryPacket packet) {
+            if (Math.abs(hatcher.getPosition() - 0.15) > SERVO_TOLERANCE) {
+                hatcher.setPosition(0.15);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    public Action getHatcherClose() {
+        return new HatcherClose();
+    }
+    //=======================================
+
+
+
 }
 
 

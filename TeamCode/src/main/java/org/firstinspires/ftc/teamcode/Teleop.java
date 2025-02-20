@@ -29,13 +29,16 @@ public class Teleop extends LinearOpMode {
         return (2750/100) * percent;
     }
 
+    double ExtendoPosition(int percent) { return (0.28/100) * percent; }
+
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-        SparkFunOTOSDrive drive = new SparkFunOTOSDrive(hardwareMap, new Pose2d(0, 0, 0));
+        PinpointDrive drive = new PinpointDrive(hardwareMap, new Pose2d(0, 0, 0));
 
         double drivePowerMult = 0.9;
         int elevatorPercent = 0;
+        int extendoPercent = 0;
 
 //        DistanceSensor dist = hardwareMap.get(DistanceSensor.class, "dist");
 //        RevColorSensorV3 colorSensor = hardwareMap.get(RevColorSensorV3.class, "dist");
@@ -54,7 +57,7 @@ public class Teleop extends LinearOpMode {
             double rx = Math.pow(gamepad1.right_stick_x, 3);
 
             if (gamepad1.options) {
-                drive.otos.resetTracking();
+                drive.pinpoint.resetYaw();
             }
             if(gamepad1.a && runningActions.isEmpty()) {
                 runningActions.add(compoundActions.getExtendIntakeTeleop());
@@ -66,7 +69,7 @@ public class Teleop extends LinearOpMode {
                 runningActions.add(compoundActions.getScore());
             }
             if(gamepad1.x && runningActions.isEmpty()) {
-                runningActions.add(compoundActions.getFold());
+                runningActions.add(compoundActions.primitives.getHatcherClose());
             }
             if((gamepad1.right_bumper || gamepad2.right_bumper) && runningActions.isEmpty()) {
                     runningActions.add(compoundActions.primitives.getClawClose());
@@ -107,8 +110,9 @@ public class Teleop extends LinearOpMode {
             }
 
             if (gamepad2.dpad_up) {
-                compoundActions.primitives.extendol.setPosition(-gamepad2.right_stick_y * 0.3);
-                compoundActions.primitives.extendor.setPosition(-gamepad2.right_stick_y * 0.3);
+                extendoPercent += (int) (-3.0 * gamepad2.right_stick_y);
+                compoundActions.primitives.extendol.setPosition(ExtendoPosition(extendoPercent));
+                compoundActions.primitives.extendor.setPosition(ExtendoPosition(extendoPercent));
 
 //                if (-gamepad2.right_stick_y > 0.95) {
 //                    runningActions.add(compoundActions.primitives.getExtendoWristOut());
@@ -119,6 +123,8 @@ public class Teleop extends LinearOpMode {
 //                    runningActions.add(compoundActions.primitives.getSpinStop());
 //                }
             }
+
+
             if (Math.abs(gamepad2.left_stick_y) > 0.1 && gamepad2.dpad_down && runningActions.isEmpty()) {
                 int velocity = (int)(-gamepad2.left_stick_y * 10);
                 elevatorPercent += velocity;
@@ -163,6 +169,7 @@ public class Teleop extends LinearOpMode {
             telemetry.addData("elevl", compoundActions.primitives.elevatorl.getCurrentPosition());
             telemetry.addData("elevl_speed", compoundActions.primitives.elevatorl.getVelocity());
             telemetry.addData("elevr_speed", compoundActions.primitives.elevatorr.getVelocity());
+            telemetry.addData("Hate Hatcher", extendoPercent);
             telemetry.update();
 
             TelemetryPacket packet = new TelemetryPacket();

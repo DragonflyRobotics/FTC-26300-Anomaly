@@ -65,6 +65,7 @@ public class CompoundActions {
         return new SequentialAction(
 //                primitives.getSpinIn(),
                 primitives.getExtendoOverFence(),
+                primitives.getHatcherOpen(),
 //                new SleepAction(0.25),
                 new ParallelAction(
                         primitives.getExtendoWristOutTeleop(),
@@ -73,7 +74,6 @@ public class CompoundActions {
                 new SleepAction(0.25),
                 new ParallelAction(
                         primitives.getClawClose(),
-                        primitives.getExtendo(),
                         primitives.getArmHeilHitler(),
                         primitives.getArmWristParallel()
                 ),
@@ -84,6 +84,7 @@ public class CompoundActions {
 
     public Action getRetract() {
         return new SequentialAction(
+                primitives.getHatcherClose(),
                 primitives.getExtendoOverFence(),
                 new SleepAction(0.2),
                 new ParallelAction(
@@ -124,7 +125,8 @@ public class CompoundActions {
                 new SleepAction(0.2),
                 primitives.getArmWristParallel(),
 //                primitives.getSpinStop(),
-                primitives.getExtendoOverFence()
+                primitives.getExtendoOverFence(),
+                primitives.getSpinStop()
         );
     }
 
